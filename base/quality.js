@@ -31,3 +31,19 @@ export function whenIdle(fn, timeout = 1200) {
   if (document.readyState === 'complete') go();
   else addEventListener('load', go, { once: true });
 }
+
+// Carrega o 3D no primeiro sinal de uso: rolar, tocar, mexer o mouse ou o teclado.
+// A página abre leve (só HTML, CSS e texto) e o 3D entra quando a pessoa já está ali.
+export function whenEngaged(fn) {
+  const events = ['pointermove', 'pointerdown', 'touchstart', 'wheel', 'scroll', 'keydown'];
+  let done = false;
+  const go = () => {
+    if (done) return;
+    done = true;
+    events.forEach((e) => removeEventListener(e, go));
+    whenIdle(fn, 300);
+  };
+  events.forEach((e) => addEventListener(e, go, { passive: true, once: true }));
+  // Se a página já abriu rolada (voltar/recarregar no meio), carrega direto.
+  if (scrollY > 0) go();
+}

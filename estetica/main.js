@@ -4,7 +4,7 @@ import '../base/base.css';
 import './style.css';
 
 import { initBase, bindOpenStatus, autoHideHeader } from '../base/ui.js';
-import { detectQuality, whenIdle } from '../base/quality.js';
+import { detectQuality, whenEngaged } from '../base/quality.js';
 import { trackProgress } from '../base/scroll.js';
 
 const HOURS = { 0: null, 1: [540, 1140], 2: [540, 1140], 3: [540, 1140], 4: [540, 1140], 5: [540, 1140], 6: [540, 780] };
@@ -52,7 +52,7 @@ paintHeader();
 
 const quality = detectQuality();
 if (quality.tier !== 'off') {
-  whenIdle(() => {
+  whenEngaged(() => {
     import('./scene.js').then(({ startScene }) => startScene(document.getElementById('scene'), quality, state));
   });
 }

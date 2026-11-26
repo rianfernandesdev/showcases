@@ -13,6 +13,7 @@ export default defineConfig({
         main: page('./index.html'),
         odonto: page('./odonto/index.html'),
         estetica: page('./estetica/index.html'),
+        solar: page('./solar/index.html'),
       },
     },
   },

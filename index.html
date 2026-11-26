@@ -1,3 +1,75 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Showcases</title><meta name="robots" content="noindex"></head>
-<body><ul><li><a href="./odonto/">Odonto</a></li></ul></body></html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Showcases · Site AI-Ready</title>
+    <meta name="description" content="Sites de demonstração do Site AI-Ready: 3D feito em código, rápido no celular e pronto pro Google e pras IAs." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#141414" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23141414'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23ff6a00'/%3E%3C/svg%3E" />
+    <style>
+      :root {
+        --paper: #efe9df;
+        --ink: #141414;
+        --orange: #ff6a00;
+        --muted: #6d675f;
+        --line: rgba(20, 20, 20, 0.14);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font: 400 16px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
+      }
+      main { max-width: 1200px; margin: 0 auto; padding: clamp(40px, 8vw, 96px) 16px 48px; }
+      .k { font: 600 12px/1 ui-monospace, monospace; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); }
+      h1 { margin: 18px 0 16px; font-size: clamp(40px, 7vw, 88px); line-height: 0.95; letter-spacing: -0.045em; font-weight: 800; }
+      .lead { max-width: 52ch; margin: 0 0 clamp(40px, 6vw, 72px); color: var(--muted); font-size: 18px; }
+      ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+      a.card { display: grid; grid-template-rows: auto 1fr auto; min-height: 340px; padding: 22px; color: inherit; text-decoration: none; border: 1.5px solid var(--ink); background: #f7f3ec; transition: transform 0.25s, box-shadow 0.25s; }
+      a.card:hover { transform: translate(-4px, -4px); box-shadow: 6px 6px 0 var(--ink); }
+      .swatch { height: 120px; margin: -22px -22px 20px; border-bottom: 1.5px solid var(--ink); }
+      .s1 { background: radial-gradient(circle at 70% 40%, #fff6df 0 14%, transparent 15%), linear-gradient(180deg, #d6e6f1, #ece6db); }
+      .s2 { background: radial-gradient(circle at 62% 50%, rgba(240, 202, 189, 0.55) 0 22%, transparent 23%), radial-gradient(circle at 75% 62%, rgba(240, 202, 189, 0.35) 0 18%, transparent 19%), linear-gradient(180deg, #4a2438, #1c0b14); }
+      .s3 { background: radial-gradient(circle at 50% 55%, #222120 0 26%, transparent 27%), conic-gradient(from 180deg at 50% 55%, #25407e, #ff7a3d, #ffd23a, #ff4a3d, #25407e); }
+      h2 { margin: 0 0 8px; font-size: 26px; letter-spacing: -0.03em; }
+      p { margin: 0; color: var(--muted); }
+      .meta { margin-top: 20px; padding-top: 14px; border-top: 1px dashed var(--line); font: 500 12px/1.5 ui-monospace, monospace; color: var(--ink); }
+      footer { max-width: 1200px; margin: 0 auto; padding: 24px 16px 40px; font: 500 12px/1.5 ui-monospace, monospace; color: var(--muted); border-top: 1px solid var(--line); }
+      @media (max-width: 860px) { ul { grid-template-columns: 1fr; } a.card { min-height: 0; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <span class="k">Site AI-Ready · showcases</span>
+      <h1>Três sites, zero template.</h1>
+      <p class="lead">Empresas fictícias, feitas do zero em código pra mostrar o produto: 3D na primeira dobra, rápido no celular e pronto pro Google e pras IAs. Abre no celular.</p>
+      <ul>
+        <li>
+          <a class="card" href="./odonto/">
+            <div class="swatch s1" aria-hidden="true"></div>
+            <div><h2>Clara Odontologia</h2><p>Clínica odontológica. Um molar 3D que se abre em camadas pra explicar a consulta.</p></div>
+            <div class="meta">Odonto · claro e acolhedor · sem preço (regra do CFO)</div>
+          </a>
+        </li>
+        <li>
+          <a class="card" href="./estetica/">
+            <div class="swatch s2" aria-hidden="true"></div>
+            <div><h2>Ateliê Derme</h2><p>Estética avançada. Vidro 3D com refração: bolhas, frasco e um objeto por linha de cuidado.</p></div>
+            <div class="meta">Estética · premium e editorial</div>
+          </a>
+        </li>
+        <li>
+          <a class="card" href="./solar/">
+            <div class="swatch s3" aria-hidden="true"></div>
+            <div><h2>Meridia Energia</h2><p>Energia solar pra empresas. Um relógio solar de 24 h que marca a hora real de Porto Alegre.</p></div>
+            <div class="meta">Coringa · técnico e escuro · com simulador</div>
+          </a>
+        </li>
+      </ul>
+    </main>
+    <footer>Todos os nomes, números e endereços são de exemplo.</footer>
+  </body>
+</html>

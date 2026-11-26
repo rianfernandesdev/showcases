@@ -4,7 +4,7 @@ import '../base/base.css';
 import './style.css';
 
 import { initBase, bindOpenStatus, autoHideHeader, nowInPOA, fmtTime, toast } from '../base/ui.js';
-import { detectQuality, whenIdle } from '../base/quality.js';
+import { detectQuality, whenEngaged } from '../base/quality.js';
 import { trackProgress, range } from '../base/scroll.js';
 
 // Horário em minutos (0 = domingo).
@@ -72,7 +72,7 @@ buildSlots();
 // ---------- 3D: só depois do conteúdo, e só se o aparelho aguenta ----------
 const quality = detectQuality();
 if (quality.tier !== 'off') {
-  whenIdle(() => {
+  whenEngaged(() => {
     import('./scene.js').then(({ startScene }) =>
       startScene(document.getElementById('stage'), quality, state, document.getElementById('labels')),
     );
