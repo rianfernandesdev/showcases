@@ -30,10 +30,7 @@
       ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
       a.card { display: grid; grid-template-rows: auto 1fr auto; min-height: 340px; padding: 22px; color: inherit; text-decoration: none; border: 1.5px solid var(--ink); background: #f7f3ec; transition: transform 0.25s, box-shadow 0.25s; }
       a.card:hover { transform: translate(-4px, -4px); box-shadow: 6px 6px 0 var(--ink); }
-      .swatch { height: 120px; margin: -22px -22px 20px; border-bottom: 1.5px solid var(--ink); }
-      .s1 { background: radial-gradient(circle at 70% 40%, #fff6df 0 14%, transparent 15%), linear-gradient(180deg, #d6e6f1, #ece6db); }
-      .s2 { background: radial-gradient(circle at 62% 50%, rgba(240, 202, 189, 0.55) 0 22%, transparent 23%), radial-gradient(circle at 75% 62%, rgba(240, 202, 189, 0.35) 0 18%, transparent 19%), linear-gradient(180deg, #4a2438, #1c0b14); }
-      .s3 { background: radial-gradient(circle at 50% 55%, #222120 0 26%, transparent 27%), conic-gradient(from 180deg at 50% 55%, #25407e, #ff7a3d, #ffd23a, #ff4a3d, #25407e); }
+      .capa { display: block; width: calc(100% + 44px); height: auto; aspect-ratio: 960 / 578; object-fit: cover; object-position: top; margin: -22px -22px 20px; border-bottom: 1.5px solid var(--ink); background: #ddd5c8; }
       h2 { margin: 0 0 8px; font-size: 26px; letter-spacing: -0.03em; }
       p { margin: 0; color: var(--muted); }
       .meta { margin-top: 20px; padding-top: 14px; border-top: 1px dashed var(--line); font: 500 12px/1.5 ui-monospace, monospace; color: var(--ink); }
@@ -49,21 +46,21 @@
       <ul>
         <li>
           <a class="card" href="./odonto/">
-            <div class="swatch s1" aria-hidden="true"></div>
+            <img class="capa" src="./capas/odonto.webp" width="960" height="578" alt="Primeira dobra do site da Clara Odontologia, com o molar 3D" loading="lazy" decoding="async" />
             <div><h2>Clara Odontologia</h2><p>Clínica odontológica. Um molar 3D que se abre em camadas pra explicar a consulta.</p></div>
             <div class="meta">Odonto · claro e acolhedor · sem preço (regra do CFO)</div>
           </a>
         </li>
         <li>
           <a class="card" href="./estetica/">
-            <div class="swatch s2" aria-hidden="true"></div>
+            <img class="capa" src="./capas/estetica.webp" width="960" height="578" alt="Primeira dobra do site do Ateliê Derme, com as bolhas de vidro 3D" loading="lazy" decoding="async" />
             <div><h2>Ateliê Derme</h2><p>Estética avançada. Vidro 3D com refração: bolhas, frasco e um objeto por linha de cuidado.</p></div>
             <div class="meta">Estética · premium e editorial</div>
           </a>
         </li>
         <li>
           <a class="card" href="./solar/">
-            <div class="swatch s3" aria-hidden="true"></div>
+            <img class="capa" src="./capas/solar.webp" width="960" height="578" alt="Primeira dobra do site da Meridia Energia, com o relógio solar" loading="lazy" decoding="async" />
             <div><h2>Meridia Energia</h2><p>Energia solar pra empresas. Um relógio solar de 24 h que marca a hora real de Porto Alegre.</p></div>
             <div class="meta">Coringa · técnico e escuro · com simulador</div>
           </a>
