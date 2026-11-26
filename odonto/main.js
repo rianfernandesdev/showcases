@@ -55,7 +55,7 @@ function buildSlots() {
   list.innerHTML = out
     .map(
       (s) =>
-        `<li><button type="button" aria-pressed="false"><b>${s.label}</b><small>${s.count} horários · a partir de ${s.time}</small></button></li>`,
+        `<li><button type="button" aria-pressed="false"><b>${s.label}</b><small>${s.count} horários<br />a partir de ${s.time}</small></button></li>`,
     )
     .join('');
   list.addEventListener('click', (e) => {
@@ -65,7 +65,8 @@ function buildSlots() {
     toast(`Demonstração: no site real, abre o WhatsApp com "${b.querySelector('b').textContent}" já escrito.`);
   });
   const next = out[0];
-  if (next) document.querySelector('[data-next-slot]').textContent = `${next.label}, ${next.time}`;
+  const nextEl = document.querySelector('[data-next-slot]');
+  if (next && nextEl) nextEl.textContent = `${next.label}, ${next.time}`;
 }
 buildSlots();
 

@@ -181,7 +181,6 @@ body {
 .kicker,
 .frame-k,
 .tag,
-.slot-card .k,
 .steps .n {
   font-family: var(--mono);
   font-size: 11.5px;
@@ -215,11 +214,17 @@ body {
   height: 100vh;
   height: 100svh;
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  align-items: center;
-  gap: clamp(16px, 3vw, 48px);
-  padding: calc(var(--hdr) + 12px) var(--gutter) 28px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-areas: 'copy win' 'frames win';
+  column-gap: clamp(24px, 4vw, 64px);
+  row-gap: 20px;
+  padding: calc(var(--hdr) + 12px) calc(var(--gutter) + 20px) 24px var(--gutter);
   overflow: hidden;
+}
+.hero-copy {
+  grid-area: copy;
+  align-self: center;
 }
 .pill {
   display: inline-flex;
@@ -269,14 +274,15 @@ body {
 
 /* Janela em arco com o 3D */
 .window {
+  grid-area: win;
   position: relative;
-  height: min(76svh, 720px);
+  min-height: 0;
   display: grid;
   place-items: center;
 }
 .window-frame {
   position: relative;
-  width: min(100%, 560px);
+  width: min(100%, 660px);
   height: 100%;
   border-radius: 999px 999px 36px 36px;
   background:
@@ -325,9 +331,8 @@ body {
   font-weight: 600;
 }
 .tag-a {
-  top: 15%;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 22px;
+  left: 24px;
 }
 .tag-b {
   bottom: 22px;
@@ -393,16 +398,15 @@ body {
 
 /* Cartões das 3 vistas */
 .frames {
-  position: absolute;
-  left: calc(50% + 8px);
-  bottom: 40px;
-  z-index: 4;
-  width: min(330px, 40vw);
+  grid-area: frames;
+  position: relative;
+  display: grid;
+  width: min(440px, 100%);
 }
+/* as 3 vistas ocupam a mesma célula: a altura é a do maior cartão */
 .frame {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  grid-area: 1 / 1;
+  position: relative;
   width: 100%;
   padding: 20px 22px 22px;
   background: rgba(251, 248, 243, 0.94);
@@ -456,35 +460,6 @@ body {
   transform-origin: top;
   transform: scaleY(var(--f, 0));
 }
-.slot-card {
-  position: absolute;
-  left: var(--gutter);
-  bottom: 28px;
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: end;
-  gap: 2px 18px;
-  padding: 14px 18px;
-  background: var(--paper);
-  border-radius: 16px;
-  box-shadow: 0 18px 40px -24px rgba(40, 30, 20, 0.5);
-}
-.slot-card .k {
-  grid-column: 1 / -1;
-  color: var(--muted);
-  font-size: 10.5px;
-}
-.slot-card strong {
-  font-size: 20px;
-  letter-spacing: -0.02em;
-}
-.slot-card a {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--coral-d);
-  text-decoration: none;
-}
-
 /* ---------- Seções ---------- */
 .sec {
   padding: clamp(80px, 12vw, 160px) var(--gutter);
@@ -515,7 +490,7 @@ body {
   box-shadow: 0 28px 50px -34px rgba(40, 30, 20, 0.5);
 }
 .card h3 {
-  margin: 56px 0 8px;
+  margin: 70px 0 8px;
   font-size: 24px;
   letter-spacing: -0.025em;
   font-weight: 700;
@@ -542,22 +517,25 @@ body {
   font-weight: 600;
   font-size: 15px;
 }
-/* Bolinhas de "massinha" em CSS (os cards não carregam 3D) */
-.blob {
+/* Ícone de traço em selo colorido (os cards não carregam 3D) */
+.ico {
   position: absolute;
-  top: 22px;
-  left: 24px;
-  width: 46px;
-  height: 42px;
-  border-radius: 58% 42% 52% 48% / 52% 58% 42% 48%;
-  box-shadow:
-    inset -6px -8px 12px rgba(0, 0, 0, 0.12),
-    inset 6px 6px 10px rgba(255, 255, 255, 0.55);
-  transition: border-radius 0.6s, transform 0.6s;
+  top: 24px;
+  left: 26px;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  color: var(--ink);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.card:hover .blob {
-  border-radius: 46% 54% 44% 56% / 58% 44% 56% 42%;
-  transform: rotate(-12deg) scale(1.08);
+.ico svg {
+  width: 28px;
+  height: 28px;
+}
+.card:hover .ico {
+  transform: rotate(-6deg) scale(1.06);
 }
 .b-sky {
   background: var(--sky);
@@ -570,6 +548,7 @@ body {
 }
 .b-ink {
   background: #3b4658;
+  color: var(--cream);
 }
 
 /* Regra */
@@ -717,20 +696,26 @@ body {
     var(--cream);
 }
 .book-in {
-  max-width: 980px;
+  max-width: 1080px;
+  margin: 0 auto;
+  text-align: center;
+}
+.book-in .sec-lead {
+  margin-inline: auto;
 }
 .slots {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 36px 0 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 40px 0 36px;
 }
 .slots button {
   display: grid;
-  gap: 3px;
-  min-width: 128px;
-  padding: 14px 18px;
-  text-align: left;
+  justify-items: center;
+  gap: 4px;
+  width: 100%;
+  padding: 18px 14px;
+  text-align: center;
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -747,6 +732,20 @@ body {
 }
 .slots b {
   font-size: 17px;
+}
+.btn-wa {
+  justify-content: center;
+  gap: 12px;
+  min-width: min(100%, 360px);
+  color: #fff;
+  background: #1f9d55;
+}
+.btn-wa:hover {
+  background: #1a8a4a;
+}
+.btn-wa .wa {
+  width: 24px;
+  height: 24px;
 }
 .slots small {
   font: 500 11px/1.2 var(--mono);
@@ -890,9 +889,11 @@ address {
   }
   .hero-pin {
     grid-template-columns: 1fr;
-    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas: 'copy' 'win' 'frames';
     align-items: stretch;
-    gap: 14px;
+    gap: 12px;
+    padding-right: var(--gutter);
     padding-top: calc(var(--hdr) + 8px);
     padding-bottom: 16px;
   }
@@ -917,7 +918,6 @@ address {
     height: 22px;
   }
   .window {
-    height: 100%;
     min-height: 0;
   }
   .window-frame {
@@ -925,27 +925,26 @@ address {
     border-radius: 999px 999px 28px 28px;
   }
   .frames {
-    left: var(--gutter);
-    right: var(--gutter);
-    bottom: 28px;
-    width: auto;
+    width: 100%;
   }
   .frame {
-    padding: 16px 18px 18px;
+    padding: 12px 16px 14px;
     border-radius: 18px;
   }
   .frame h2 {
-    font-size: 20px;
+    margin: 4px 0 2px;
+    font-size: 18px;
   }
   .frame p {
     font-size: 14px;
   }
-  .tag-b,
-  .slot-card {
+  .tag-b {
     display: none;
   }
   .tag-a {
-    top: 12%;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .ticks {
     right: calc(var(--gutter) + 12px);
@@ -978,10 +977,35 @@ address {
   .faq-wrap {
     gap: 8px;
   }
+  .slots {
+    grid-template-columns: 1fr 1fr;
+  }
+  .slots li:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+  .btn-wa {
+    width: 100%;
+  }
   .faq summary {
     font-size: 18px;
   }
   .rule-in {
     border-radius: 26px;
+  }
+}
+
+/* tela baixa no computador: tira a linha de detalhes pra caber o cartão da vista */
+@media (min-width: 821px) and (max-height: 880px) {
+  .hero-copy .facts {
+    display: none;
+  }
+  .pill {
+    margin-bottom: 16px;
+  }
+  .hero-copy .lead {
+    margin-top: 18px;
+  }
+  .ctas {
+    margin-top: 24px;
   }
 }

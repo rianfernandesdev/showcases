@@ -15,7 +15,7 @@ export function createStage(host, quality, opts = {}) {
   const { fov = 35, near = 0.1, far = 100, envIntensity = 0.6, transparent = true } = opts;
 
   const renderer = new WebGLRenderer({
-    antialias: quality.tier === 'high',
+    antialias: opts.antialias ?? quality.tier === 'high',
     alpha: transparent,
     powerPreference: 'high-performance',
   });

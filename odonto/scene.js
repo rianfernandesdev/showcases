@@ -4,7 +4,6 @@
 import {
   Group,
   Mesh,
-  IcosahedronGeometry,
   PlaneGeometry,
   Vector3,
   Color,
@@ -23,26 +22,8 @@ import {
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { createStage, toScreen } from '../base/stage.js';
-import { clayNoise, softShadow, glow } from '../base/textures.js';
+import { softShadow } from '../base/textures.js';
 import { range, smooth } from '../base/scroll.js';
-
-// Pedrinha de massinha: icosaedro amassado por um ruído simples.
-function pebbleGeometry(seed) {
-  const g = new IcosahedronGeometry(1, 4);
-  const pos = g.attributes.position;
-  const v = new Vector3();
-  for (let i = 0; i < pos.count; i++) {
-    v.fromBufferAttribute(pos, i);
-    const d =
-      1 +
-      0.12 * Math.sin(v.x * 3.1 + seed) * Math.cos(v.y * 2.7 + seed * 2) +
-      0.06 * Math.sin(v.z * 5.3 + seed * 3);
-    v.multiplyScalar(d);
-    pos.setXYZ(i, v.x, v.y * 0.85, v.z);
-  }
-  g.computeVertexNormals();
-  return g;
-}
 
 function starTexture() {
   const c = document.createElement('canvas');
@@ -64,7 +45,7 @@ function starTexture() {
 }
 
 export function startScene(host, quality, state, labelsEl) {
-  const stage = createStage(host, quality, { fov: 30, envIntensity: 0.55, exposure: 1.05 });
+  const stage = createStage(host, quality, { antialias: quality.tier !== 'low', fov: 30, envIntensity: 0.55, exposure: 1.05 });
   const { scene, camera, pointer } = stage;
   const high = quality.tier === 'high';
   const detail = quality.tier === 'low' ? 32 : 56;
@@ -88,7 +69,6 @@ export function startScene(host, quality, state, labelsEl) {
     emissive: 0x6e1e10,
     emissiveIntensity: 0.25,
   });
-  const noise = quality.tier === 'low' ? null : clayNoise();
   enamelMat.emissive.setHex(0xfff2d6);
 
   // Dente: as 4 camadas vêm prontas no molar.glb e entram quando carregam.
@@ -139,28 +119,6 @@ export function startScene(host, quality, state, labelsEl) {
   shadow.position.y = -2.15;
   shadow.scale.set(2.6, 1.6, 1);
   scene.add(shadow);
-
-  // Pedrinhas de massinha flutuando
-  const colors = [0xbfd8ea, 0xe8765a, 0xf4d58d, 0xbfd8ea, 0xf4d58d, 0x3b4658];
-  const homes = [
-    [-1.55, 1.2, -0.6, 0.2],
-    [1.6, -0.4, 0.3, 0.16],
-    [-1.35, -1.25, 0.5, 0.24],
-    [1.25, 1.05, 0.8, 0.12],
-    [-0.4, -1.95, 0.9, 0.14],
-    [0.9, -1.6, -0.9, 0.18],
-  ];
-  const pebbles = homes.map(([x, y, z, s], i) => {
-    const m = new Mesh(
-      pebbleGeometry(i * 1.7),
-      new MeshStandardMaterial({ color: colors[i], roughness: 0.82, bumpMap: noise, bumpScale: 1.5 }),
-    );
-    m.position.set(x, y, z);
-    m.scale.setScalar(s);
-    m.userData = { home: new Vector3(x, y, z), phase: i * 1.3, radius: 1.5 + (i % 3) * 0.25 };
-    scene.add(m);
-    return m;
-  });
 
   // Brilhos da vista 3
   const sparkMat = new SpriteMaterial({
@@ -230,17 +188,6 @@ export function startScene(host, quality, state, labelsEl) {
       const tw = reduce ? 1 : 0.6 + 0.4 * Math.sin(t * 3 + sp.userData.phase);
       sp.material.opacity = s * tw;
       sp.scale.setScalar(0.35 * s * (0.7 + 0.3 * tw));
-    });
-
-    // Pedrinhas: flutuam em casa; na vista 3, giram em volta do dente.
-    pebbles.forEach((m) => {
-      const { home, phase, radius } = m.userData;
-      const a = (reduce ? 0 : t * 0.5) + phase;
-      const orbit = tmp.set(Math.cos(a) * radius, Math.sin(a * 0.7) * 0.6 + 0.3, Math.sin(a) * radius * 0.6);
-      m.position.lerpVectors(home, orbit, s);
-      m.position.y += reduce ? 0 : Math.sin(t * 1.5 + phase) * 0.06;
-      m.rotation.x = phase + (reduce ? 0 : t * 0.3);
-      m.rotation.y = phase * 2 + (reduce ? 0 : t * 0.2);
     });
 
     // Rótulos em HTML acompanhando as camadas
