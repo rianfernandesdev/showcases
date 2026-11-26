@@ -4,7 +4,7 @@ import '../base/base.css';
 import './style.css';
 
 import { initBase } from '../base/ui.js';
-import { detectQuality, whenEngaged } from '../base/quality.js';
+import { detectQuality, when3D } from '../base/quality.js';
 import { trackProgress } from '../base/scroll.js';
 
 initBase();
@@ -52,8 +52,6 @@ simulate();
 
 // ---------- 3D ----------
 const quality = detectQuality();
-if (quality.tier !== 'off') {
-  whenEngaged(() => {
-    import('./scene.js').then(({ startScene }) => startScene(document.getElementById('instrument'), quality, state));
-  });
-}
+when3D(quality, () => {
+  import('./scene.js').then(({ startScene }) => startScene(document.getElementById('instrument'), quality, state));
+});

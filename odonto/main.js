@@ -4,7 +4,7 @@ import '../base/base.css';
 import './style.css';
 
 import { initBase, bindOpenStatus, autoHideHeader, nowInPOA, fmtTime, toast } from '../base/ui.js';
-import { detectQuality, whenEngaged } from '../base/quality.js';
+import { detectQuality, when3D } from '../base/quality.js';
 import { trackProgress, range } from '../base/scroll.js';
 
 // Horário em minutos (0 = domingo).
@@ -33,49 +33,57 @@ trackProgress(hero, (p) => {
   }
 });
 
-// ---------- Horários livres (gerados a partir de hoje, em POA) ----------
-function buildSlots() {
+// ---------- Agendar: escolhe o dia e a mensagem do WhatsApp sai pronta ----------
+// Sem integração com agenda: mostra só os próximos dias em que a clínica abre (HOURS)
+// e manda o dia escolhido no texto. Quem confirma o horário é a recepção, no WhatsApp.
+function buildDays() {
   const list = document.getElementById('slots');
+  const msgEl = document.querySelector('[data-wa-msg]');
+  const waBtn = document.querySelector('[data-wa]');
   const { day, h, m } = nowInPOA();
   const now = h * 60 + m;
-  const names = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  const names = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  const short = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  const base = new Date();
   const out = [];
-  for (let i = 0; out.length < 5 && i < 10; i++) {
+  for (let i = 0; out.length < 6 && i < 14; i++) {
     const d = (day + i) % 7;
     const hours = HOURS[d];
     if (!hours) continue;
-    // primeiro horário "livre": um pseudo-aleatório estável por dia
-    const seed = (d * 37 + i * 11) % 7;
-    let first = hours[0] + 40 + seed * 30;
-    if (i === 0) first = Math.max(first, Math.ceil((now + 50) / 20) * 20);
-    if (first > hours[1] - 50) continue;
-    const label = i === 0 ? 'Hoje' : i === 1 ? 'Amanhã' : names[d];
-    out.push({ label, time: fmtTime(first), count: 2 + ((seed * 3) % 6) });
+    if (i === 0 && now > hours[1] - 60) continue; // hoje já está fechando
+    const date = new Date(base.getTime() + i * 864e5);
+    const dm = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}`;
+    const label = i === 0 ? 'Hoje' : i === 1 ? 'Amanhã' : short[d];
+    const said = i === 0 ? 'hoje' : i === 1 ? 'amanhã' : `${d === 0 || d === 6 ? 'no' : 'na'} ${names[d]}`;
+    out.push({ label, dm, said: `${said} (${dm})` });
   }
   list.innerHTML = out
-    .map(
-      (s) =>
-        `<li><button type="button" aria-pressed="false"><b>${s.label}</b><small>${s.count} horários<br />a partir de ${s.time}</small></button></li>`,
-    )
+    .map((s, i) => `<li><button type="button" aria-pressed="false" data-i="${i}"><b>${s.label}</b><small>${s.dm}</small></button></li>`)
     .join('');
+
+  const paint = (s) => {
+    const text = s
+      ? `Olá! Vim pelo site e gostaria de saber se tem horário disponível ${s.said}.`
+      : 'Olá! Vim pelo site e gostaria de agendar uma avaliação.';
+    msgEl.textContent = text;
+    // no site real: waBtn.href = `https://wa.me/55DDDNUMERO?text=${encodeURIComponent(text)}`
+    waBtn.dataset.demo = 'Demonstração: no site real, abre o WhatsApp da clínica com essa mensagem já escrita.';
+  };
   list.addEventListener('click', (e) => {
     const b = e.target.closest('button');
     if (!b) return;
-    list.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-    toast(`Demonstração: no site real, abre o WhatsApp com "${b.querySelector('b').textContent}" já escrito.`);
+    const on = b.getAttribute('aria-pressed') !== 'true';
+    list.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(on && x === b)));
+    paint(on ? out[+b.dataset.i] : null);
   });
-  const next = out[0];
-  const nextEl = document.querySelector('[data-next-slot]');
-  if (next && nextEl) nextEl.textContent = `${next.label}, ${next.time}`;
+  paint(null);
 }
-buildSlots();
+buildDays();
 
 // ---------- 3D: só depois do conteúdo, e só se o aparelho aguenta ----------
 const quality = detectQuality();
-if (quality.tier !== 'off') {
-  whenEngaged(() => {
-    import('./scene.js').then(({ startScene }) =>
-      startScene(document.getElementById('stage'), quality, state, document.getElementById('labels')),
-    );
-  });
-}
+when3D(quality, () => {
+  import('./scene.js').then(({ startScene }) =>
+    startScene(document.getElementById('stage'), quality, state, document.getElementById('labels')),
+  );
+});

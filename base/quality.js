@@ -17,7 +17,9 @@ export function detectQuality() {
   }
 
   if (!webgl || saveData) return { tier: 'off', reduce, dpr: 1, small };
-  if (memory <= 2 || (cores <= 4 && small)) return { tier: 'low', reduce, dpr: 1, small };
+  // Fraco de verdade: pouca memória (Android informa) ou só 2 núcleos.
+  // iPhone não informa memória e pode informar poucos núcleos, então não entra aqui por isso.
+  if (memory <= 2 || cores <= 2) return { tier: 'low', reduce, dpr: 1, small };
   const dpr = Math.min(devicePixelRatio || 1, small ? 1.5 : 2);
   return { tier: small ? 'mid' : 'high', reduce, dpr, small };
 }
@@ -46,4 +48,12 @@ export function whenEngaged(fn) {
   events.forEach((e) => addEventListener(e, go, { passive: true, once: true }));
   // Se a página já abriu rolada (voltar/recarregar no meio), carrega direto.
   if (scrollY > 0) go();
+}
+
+// Quando o 3D entra: em aparelho normal, logo que a página termina de carregar;
+// em aparelho fraco, só no primeiro gesto (a página abre leve e o 3D vem depois).
+export function when3D(quality, fn) {
+  if (quality.tier === 'off') return;
+  if (quality.tier === 'low') whenEngaged(fn);
+  else whenIdle(fn, 600);
 }

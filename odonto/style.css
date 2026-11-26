@@ -12,6 +12,7 @@
   --mono: 'JetBrains Mono Variable', ui-monospace, monospace;
   --hdr: 68px;
   --gutter: clamp(16px, 4vw, 56px);
+  --bar: 30px; /* altura da tarja de empresa fictícia, que fica em cima na abertura */
 }
 
 body {
@@ -204,9 +205,11 @@ body {
 }
 
 /* ---------- Hero presa ---------- */
+/* sobe por baixo do cabeçalho (que é translúcido) pra não sobrar vão nem cortar o pé */
 .hero {
   position: relative;
   height: 330vh;
+  margin-top: calc(-1 * var(--hdr));
 }
 .hero-pin {
   position: sticky;
@@ -219,7 +222,7 @@ body {
   grid-template-areas: 'copy win' 'frames win';
   column-gap: clamp(24px, 4vw, 64px);
   row-gap: 20px;
-  padding: calc(var(--hdr) + 12px) calc(var(--gutter) + 20px) 24px var(--gutter);
+  padding: calc(var(--hdr) + 12px) calc(var(--gutter) + 20px) calc(24px + var(--bar)) var(--gutter);
   overflow: hidden;
 }
 .hero-copy {
@@ -707,7 +710,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 12px;
-  margin: 40px 0 36px;
+  margin: 40px 0 28px;
 }
 .slots button {
   display: grid;
@@ -732,6 +735,27 @@ body {
 }
 .slots b {
   font-size: 17px;
+}
+.wa-preview {
+  max-width: 520px;
+  margin: 0 auto 28px;
+}
+.wa-preview figcaption {
+  margin-bottom: 10px;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.wa-preview p {
+  position: relative;
+  display: inline-block;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 16px;
+  background: #dcf8c6;
+  border-radius: 16px 16px 4px 16px;
+  box-shadow: 0 10px 24px -18px rgba(20, 40, 20, 0.6);
 }
 .btn-wa {
   justify-content: center;
@@ -823,16 +847,25 @@ body {
   margin-top: 16px;
 }
 .ftr h3 {
-  display: flex;
-  align-items: center;
-  gap: 14px;
   margin-bottom: 14px;
   font-size: 15px;
   color: var(--cream);
 }
 .ftr .status {
-  color: rgba(245, 239, 230, 0.6);
-  font-weight: 400;
+  display: flex;
+  width: fit-content;
+  margin: -4px 0 16px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cream);
+  background: rgba(245, 239, 230, 0.06);
+  border: 1px solid rgba(245, 239, 230, 0.14);
+  border-radius: 999px;
+}
+.ftr .status[data-open='yes'] {
+  background: rgba(74, 163, 122, 0.14);
+  border-color: rgba(74, 163, 122, 0.4);
 }
 .hours li {
   display: flex;
@@ -894,8 +927,8 @@ address {
     align-items: stretch;
     gap: 12px;
     padding-right: var(--gutter);
-    padding-top: calc(var(--hdr) + 8px);
-    padding-bottom: 16px;
+    padding-top: calc(var(--hdr) + 10px);
+    padding-bottom: calc(14px + var(--bar));
   }
   .pill,
   .facts,
@@ -903,19 +936,22 @@ address {
     display: none;
   }
   .display {
-    font-size: clamp(42px, 12.5vw, 64px);
+    font-size: clamp(36px, 10.5vw, 56px);
   }
   .ctas {
-    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 14px;
     gap: 8px;
   }
   .ctas .btn {
-    padding: 12px 18px;
-    font-size: 15px;
+    justify-content: center;
+    padding: 12px 8px;
+    font-size: 14.5px;
+    white-space: nowrap;
   }
   .ctas .btn .arr {
-    width: 22px;
-    height: 22px;
+    display: none;
   }
   .window {
     min-height: 0;
@@ -936,7 +972,7 @@ address {
     font-size: 18px;
   }
   .frame p {
-    font-size: 14px;
+    display: none; /* no celular fica só o título da vista: sobra mais tela pro 3D */
   }
   .tag-b {
     display: none;
@@ -983,7 +1019,28 @@ address {
   .slots li:last-child:nth-child(odd) {
     grid-column: 1 / -1;
   }
-  .btn-wa {
+  .wa-preview {
+  max-width: 520px;
+  margin: 0 auto 28px;
+}
+.wa-preview figcaption {
+  margin-bottom: 10px;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.wa-preview p {
+  position: relative;
+  display: inline-block;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 16px;
+  background: #dcf8c6;
+  border-radius: 16px 16px 4px 16px;
+  box-shadow: 0 10px 24px -18px rgba(20, 40, 20, 0.6);
+}
+.btn-wa {
     width: 100%;
   }
   .faq summary {

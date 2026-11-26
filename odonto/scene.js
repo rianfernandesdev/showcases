@@ -145,7 +145,7 @@ export function startScene(host, quality, state, labelsEl) {
   const small = () => stage.width < 520;
   stage.onResize = (w, h) => {
     const half = MathUtils.degToRad(camera.fov / 2);
-    const needH = 2.25;
+    const needH = w < 520 ? 1.95 : 2.25;
     const needW = 1.75;
     const zh = needH / Math.tan(half);
     const zw = needW / (Math.tan(half) * (w / h));
@@ -173,7 +173,7 @@ export function startScene(host, quality, state, labelsEl) {
     tooth.rotation.y = idle + p * Math.PI * 1.6 + pointer.x * 0.4 - e * 0.35;
     tooth.rotation.x = 0.32 - pointer.y * 0.18 - e * 0.1;
     const bob = reduce ? 0 : Math.sin(t * 1.2) * 0.05;
-    tooth.position.y = 0.32 + bob + (small() ? 0.25 : 0);
+    tooth.position.y = 0.32 + bob + (small() ? 0.12 - e * 0.1 : 0);
     tooth.scale.setScalar(MathUtils.lerp(1, 0.66, e) * (1 + s * 0.06));
 
     camera.position.set(pointer.x * 0.25, 0.25 + pointer.y * 0.15, (camera.userData.baseZ || 9) - s * 0.5);
