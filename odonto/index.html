@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Clara Odontologia · Odontologia às claras em Porto Alegre</title>
+    <meta
+      name="description"
+      content="Clínica odontológica no Petrópolis, em Porto Alegre. Avaliação com fotos e raio-x na tela, plano por escrito e opções lado a lado antes de qualquer procedimento."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#f5efe6" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23e8765a'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23f5efe6'/%3E%3C/svg%3E" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Clara Odontologia (fictícia)",
+        "description": "Clínica fictícia criada como demonstração do Site AI-Ready.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rua das Laranjeiras, 214",
+          "addressLocality": "Porto Alegre",
+          "addressRegion": "RS",
+          "addressCountry": "BR"
+        },
+        "openingHoursSpecification": [
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "20:00" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "13:00" }
+        ],
+        "medicalSpecialty": ["Dentistry"],
+        "availableService": [
+          { "@type": "MedicalProcedure", "name": "Avaliação e limpeza" },
+          { "@type": "MedicalProcedure", "name": "Clareamento" },
+          { "@type": "MedicalProcedure", "name": "Alinhadores transparentes" },
+          { "@type": "MedicalProcedure", "name": "Implantes" },
+          { "@type": "MedicalProcedure", "name": "Restaurações" },
+          { "@type": "MedicalProcedure", "name": "Odontopediatria" }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div class="demo-bar">
+      Clínica fictícia · showcase do <strong>Site AI-Ready</strong><span class="demo-more">, feito em código. Nomes, números e endereço são de exemplo</span>.
+    </div>
+
+    <header class="hdr" id="topo">
+      <a class="brand" href="#topo" aria-label="Clara Odontologia, início">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="10" /><circle cx="16" cy="16" r="7" /></svg>
+        <span>Clara<em>odontologia</em></span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="#tratamentos">Tratamentos</a>
+        <a href="#primeira-consulta">Primeira consulta</a>
+        <a href="#equipe">Equipe</a>
+        <a href="#duvidas">Dúvidas</a>
+      </nav>
+      <div class="hdr-end">
+        <span class="status" data-open="yes"><i></i><span data-open-status>Aberto agora</span></span>
+        <a class="btn btn-sm" href="#agendar">Agendar</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO: fica presa enquanto o dente conta a consulta em 3 vistas -->
+      <section class="hero" id="hero" aria-labelledby="hero-title">
+        <div class="hero-pin">
+          <div class="hero-copy">
+            <p class="pill" data-reveal><i></i>Clínica geral e estética · Petrópolis, POA</p>
+            <h1 id="hero-title" class="display" data-split data-reveal>Odontologia <span class="hl">às claras.</span></h1>
+            <p class="lead" data-reveal style="--d: 3">
+              Antes de qualquer procedimento, você vê o que a gente vê na tela e entende cada opção. Nada começa sem o seu sim.
+            </p>
+            <div class="ctas" data-reveal style="--d: 4">
+              <a class="btn" href="#agendar">Agendar avaliação <span class="arr" aria-hidden="true">→</span></a>
+              <a class="btn btn-ghost" href="#tratamentos">Ver tratamentos</a>
+            </div>
+            <ul class="facts" data-reveal style="--d: 5">
+              <li>Estacionamento conveniado</li>
+              <li>Atende a partir dos 3 anos</li>
+              <li>Sábado de manhã</li>
+            </ul>
+          </div>
+
+          <div class="window" aria-hidden="true">
+            <div class="window-frame">
+              <div class="lamp"></div>
+              <div class="stage" id="stage">
+                <svg class="poster" viewBox="0 0 200 240">
+                  <ellipse cx="100" cy="214" rx="54" ry="8" fill="#000" opacity=".12" />
+                  <path d="M52 92c0-30 20-44 48-44s48 14 48 44c0 22-8 34-12 52-4 22-6 60-18 62-10 2-10-36-18-36s-8 38-18 36c-12-2-14-40-18-62-4-18-12-30-12-52z" fill="#f7f1e8" stroke="#e3d6c4" stroke-width="2" />
+                </svg>
+                <div class="labels" id="labels">
+                  <span data-part="enamel">Esmalte</span>
+                  <span data-part="dentin">Dentina</span>
+                  <span data-part="pulp">Polpa</span>
+                  <span data-part="root">Raiz</span>
+                </div>
+              </div>
+              <span class="tag tag-a">VISTA <b data-frame-num>01</b>/03</span>
+              <span class="tag tag-b">MOLAR INFERIOR · <b data-clock>00:00:00</b></span>
+            </div>
+          </div>
+
+          <ol class="frames" aria-label="Como funciona a consulta">
+            <li class="frame is-on" data-frame="0">
+              <span class="frame-k">01 · Avaliação</span>
+              <h2>Você vê o que a gente vê.</h2>
+              <p>Fotos e raio-x na tela, do seu lado da cadeira, com tudo explicado em palavras simples.</p>
+            </li>
+            <li class="frame" data-frame="1">
+              <span class="frame-k">02 · Explicação</span>
+              <h2>Cada camada, com nome.</h2>
+              <p>O plano mostra onde está o problema e o que muda em cada opção, da mais simples à mais completa.</p>
+            </li>
+            <li class="frame" data-frame="2">
+              <span class="frame-k">03 · Tratamento</span>
+              <h2>Só começa com o seu sim.</h2>
+              <p>Plano por escrito, prazo combinado e um sinal com a mão pra pausar quando quiser.</p>
+            </li>
+          </ol>
+
+          <div class="ticks" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="slot-card">
+            <span class="k">Próximo horário livre</span>
+            <strong data-next-slot>Hoje, 18h40</strong>
+            <a href="#agendar">Reservar →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- TRATAMENTOS -->
+      <section class="sec" id="tratamentos" aria-labelledby="t-title">
+        <div class="sec-head">
+          <span class="kicker" data-reveal>02 · Tratamentos</span>
+          <h2 id="t-title" class="h2" data-split data-reveal>O que a gente faz, sem letra miúda.</h2>
+          <p class="sec-lead" data-reveal>
+            Cada tratamento começa numa avaliação. O valor sai no plano por escrito, depois que a gente vê o seu caso.
+          </p>
+        </div>
+        <ul class="cards">
+          <li class="card" data-reveal style="--d: 0">
+            <span class="blob b-sky" aria-hidden="true"></span>
+            <h3>Avaliação e limpeza</h3>
+            <p>Exame completo, fotos, raio-x quando precisa e limpeza com ultrassom.</p>
+            <dl><div><dt>Tempo</dt><dd>50 min</dd></div><div><dt>Sessões</dt><dd>1</dd></div></dl>
+          </li>
+          <li class="card" data-reveal style="--d: 1">
+            <span class="blob b-butter" aria-hidden="true"></span>
+            <h3>Clareamento</h3>
+            <p>No consultório, em casa com moldeira, ou os dois. A gente indica pelo seu esmalte.</p>
+            <dl><div><dt>Tempo</dt><dd>1 h</dd></div><div><dt>Sessões</dt><dd>2 a 3</dd></div></dl>
+          </li>
+          <li class="card" data-reveal style="--d: 2">
+            <span class="blob b-coral" aria-hidden="true"></span>
+            <h3>Alinhadores transparentes</h3>
+            <p>Escaneamento digital e simulação do sorriso final antes de decidir.</p>
+            <dl><div><dt>Tempo</dt><dd>6 a 18 meses</dd></div><div><dt>Retornos</dt><dd>a cada 6 semanas</dd></div></dl>
+          </li>
+          <li class="card" data-reveal style="--d: 0">
+            <span class="blob b-ink" aria-hidden="true"></span>
+            <h3>Implantes</h3>
+            <p>Planejamento com tomografia e guia cirúrgico. Provisório no mesmo dia quando dá.</p>
+            <dl><div><dt>Tempo</dt><dd>3 a 6 meses</dd></div><div><dt>Etapas</dt><dd>2</dd></div></dl>
+          </li>
+          <li class="card" data-reveal style="--d: 1">
+            <span class="blob b-sky" aria-hidden="true"></span>
+            <h3>Restaurações</h3>
+            <p>Resina na cor do dente, com anestesia tópica antes de qualquer agulha.</p>
+            <dl><div><dt>Tempo</dt><dd>40 min</dd></div><div><dt>Sessões</dt><dd>1</dd></div></dl>
+          </li>
+          <li class="card" data-reveal style="--d: 2">
+            <span class="blob b-butter" aria-hidden="true"></span>
+            <h3>Odontopediatria</h3>
+            <p>Consulta curta, sala com brinquedo e a criança vendo tudo no espelho.</p>
+            <dl><div><dt>Idade</dt><dd>a partir dos 3</dd></div><div><dt>Tempo</dt><dd>30 min</dd></div></dl>
+          </li>
+        </ul>
+      </section>
+
+      <!-- REGRA DA CASA -->
+      <section class="rule" aria-labelledby="r-title">
+        <div class="rule-in">
+          <span class="kicker" data-reveal>03 · A regra da casa</span>
+          <h2 id="r-title" class="display-2" data-split data-reveal>Nada começa sem você entender.</h2>
+          <ol class="rule-list">
+            <li data-reveal style="--d: 0"><b>1</b><span>Plano por escrito, com prazo e opções lado a lado.</span></li>
+            <li data-reveal style="--d: 1"><b>2</b><span>A opção mais simples sempre aparece, mesmo quando não é a nossa preferida.</span></li>
+            <li data-reveal style="--d: 2"><b>3</b><span>Levantou a mão esquerda, a gente pausa. Sem pergunta.</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- PRIMEIRA CONSULTA -->
+      <section class="sec" id="primeira-consulta" aria-labelledby="p-title">
+        <div class="sec-head">
+          <span class="kicker" data-reveal>04 · Primeira consulta</span>
+          <h2 id="p-title" class="h2" data-split data-reveal>Uma hora, quatro passos.</h2>
+        </div>
+        <ol class="steps">
+          <li data-reveal style="--d: 0"><span class="n">00:00</span><h3>Conversa</h3><p>O que incomoda, histórico e medos. Sem pressa e sem jaleco na cara.</p></li>
+          <li data-reveal style="--d: 1"><span class="n">00:15</span><h3>Exame</h3><p>Fotos intraorais e raio-x digital, que aparecem na tela na hora.</p></li>
+          <li data-reveal style="--d: 2"><span class="n">00:35</span><h3>Plano</h3><p>As opções com prazo, lado a lado. Você leva por escrito pra casa.</p></li>
+          <li data-reveal style="--d: 3"><span class="n">00:50</span><h3>Limpeza</h3><p>Se não houver nada urgente, já sai com os dentes limpos.</p></li>
+        </ol>
+      </section>
+
+      <!-- EQUIPE -->
+      <section class="sec sec-tint" id="equipe" aria-labelledby="e-title">
+        <div class="sec-head">
+          <span class="kicker" data-reveal>05 · Equipe</span>
+          <h2 id="e-title" class="h2" data-split data-reveal>Quatro pessoas que explicam antes.</h2>
+        </div>
+        <ul class="team">
+          <li data-reveal style="--d: 0">
+            <span class="ava a1" aria-hidden="true">MS</span>
+            <div><h3>Dra. Marina Siqueira</h3><p>Responsável técnica · Clínica geral e estética</p><small>CRO-RS 00000</small></div>
+          </li>
+          <li data-reveal style="--d: 1">
+            <span class="ava a2" aria-hidden="true">RA</span>
+            <div><h3>Dr. Rafael Amaral</h3><p>Implantes e prótese</p><small>CRO-RS 00000</small></div>
+          </li>
+          <li data-reveal style="--d: 2">
+            <span class="ava a3" aria-hidden="true">LT</span>
+            <div><h3>Dra. Luísa Tonetto</h3><p>Ortodontia e alinhadores</p><small>CRO-RS 00000</small></div>
+          </li>
+          <li data-reveal style="--d: 3">
+            <span class="ava a4" aria-hidden="true">BK</span>
+            <div><h3>Dra. Bruna Kessler</h3><p>Odontopediatria · boa com quem tem medo</p><small>CRO-RS 00000</small></div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- AGENDAR -->
+      <section class="book" id="agendar" aria-labelledby="a-title">
+        <div class="book-in">
+          <span class="kicker" data-reveal>06 · Agendar</span>
+          <h2 id="a-title" class="display-2" data-split data-reveal>Escolhe o dia. <span class="hl">A gente confirma.</span></h2>
+          <p class="sec-lead" data-reveal>Toca num horário e a conversa abre no WhatsApp com o dia já escrito.</p>
+          <ul class="slots" id="slots" data-reveal></ul>
+          <a class="btn btn-big" href="#" data-demo data-reveal>Falar no WhatsApp <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
+      <!-- DÚVIDAS -->
+      <section class="sec" id="duvidas" aria-labelledby="d-title">
+        <div class="faq-wrap">
+          <div class="sec-head">
+            <span class="kicker" data-reveal>07 · Dúvidas</span>
+            <h2 id="d-title" class="h2" data-split data-reveal>O que mais perguntam.</h2>
+          </div>
+          <div class="faq" data-reveal>
+            <details open>
+              <summary>Dói?</summary>
+              <p>A gente passa anestesia tópica antes de qualquer agulha, então a picada quase não se sente. Se doer em qualquer momento, levanta a mão e a gente para.</p>
+            </details>
+            <details>
+              <summary>Vocês atendem convênio?</summary>
+              <p>Sim, os principais planos odontológicos. Na avaliação, a gente confere o que o seu plano cobre antes de montar as opções.</p>
+            </details>
+            <details>
+              <summary>Dá pra parcelar?</summary>
+              <p>Sim. As formas de pagamento ficam no plano por escrito que você recebe depois da avaliação.</p>
+            </details>
+            <details>
+              <summary>Atendem urgência?</summary>
+              <p>Sim, no mesmo dia, em horário reservado pra isso. Chama no WhatsApp que a gente encaixa.</p>
+            </details>
+            <details>
+              <summary>Onde estaciono?</summary>
+              <p>No estacionamento conveniado ao lado. A primeira hora fica por nossa conta.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="ftr">
+      <div class="ftr-grid">
+        <div>
+          <a class="brand brand-light" href="#topo">
+            <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="10" /><circle cx="16" cy="16" r="7" /></svg>
+            <span>Clara<em>odontologia</em></span>
+          </a>
+          <p class="ftr-note">Clínica geral e estética no Petrópolis, em Porto Alegre. Responsável técnica: Dra. Marina Siqueira, CRO-RS 00000.</p>
+        </div>
+        <div>
+          <h3>Horários <span class="status" data-open="yes"><i></i><span data-open-status>Aberto agora</span></span></h3>
+          <ul class="hours">
+            <li data-day="1"><span>Segunda</span><span>08h às 20h</span></li>
+            <li data-day="2"><span>Terça</span><span>08h às 20h</span></li>
+            <li data-day="3"><span>Quarta</span><span>08h às 20h</span></li>
+            <li data-day="4"><span>Quinta</span><span>08h às 20h</span></li>
+            <li data-day="5"><span>Sexta</span><span>08h às 20h</span></li>
+            <li data-day="6"><span>Sábado</span><span>08h às 13h</span></li>
+            <li data-day="0"><span>Domingo</span><span>fechado</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Onde fica</h3>
+          <address>Rua das Laranjeiras, 214<br />Petrópolis · Porto Alegre, RS</address>
+          <p><a href="#" data-demo>(51) 0000-0000</a></p>
+        </div>
+      </div>
+      <div class="ftr-base">
+        <span>© <span data-year></span> Clara Odontologia · empresa fictícia</span>
+        <span>Showcase Site AI-Ready · 3D em código, sem template</span>
+      </div>
+    </footer>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

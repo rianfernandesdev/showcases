@@ -1,0 +1,156 @@
+/* Base comum dos showcases: reset, tarja de demonstração, revelação e utilitários. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+a {
+  color: inherit;
+}
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+dl,
+dd {
+  margin: 0;
+}
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Tarja: deixa claro que a empresa é fictícia. */
+.demo-bar {
+  position: relative;
+  z-index: 60;
+  padding: 7px 16px;
+  font: 500 12px/1.3 system-ui, sans-serif;
+  letter-spacing: 0.01em;
+  text-align: center;
+  background: #111;
+  color: #f3f3f3;
+}
+.demo-bar strong {
+  font-weight: 650;
+}
+@media (max-width: 640px) {
+  .demo-more {
+    display: none;
+  }
+}
+.demo-bar a {
+  color: inherit;
+  text-underline-offset: 2px;
+}
+
+/* Canvas 3D: entra suave quando o primeiro quadro fica pronto. */
+.stage-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.is-ready > .stage-canvas {
+  opacity: 1;
+}
+
+/* Revelação ao rolar. Só esconde se o JS estiver ativo. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--d, 0) * 80ms);
+}
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Palavras em cascata. */
+[data-split] .w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+[data-split] .w > span {
+  display: inline-block;
+  transform: translateY(105%);
+  transition: transform 0.9s cubic-bezier(0.2, 0.75, 0.15, 1);
+  transition-delay: calc(var(--i) * 45ms + 120ms);
+}
+.is-in [data-split] .w > span,
+[data-split].is-in .w > span {
+  transform: none;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 100;
+  max-width: calc(100vw - 32px);
+  padding: 12px 16px;
+  font: 500 14px/1.4 system-ui, sans-serif;
+  color: #fff;
+  background: #111;
+  border-radius: 10px;
+  transform: translate(-50%, 140%);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.toast.is-on {
+  transform: translate(-50%, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
