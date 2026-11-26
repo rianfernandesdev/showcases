@@ -6,7 +6,7 @@ pros sites de cliente.
 
 | Showcase | Nicho | O que mostra | Referência de estrutura |
 |---|---|---|---|
-| [`odonto/`](odonto/) · Clara Odontologia | Odontologia | Molar 3D de "massinha" que se abre em camadas (esmalte, dentina, polpa, raiz) em 3 vistas presas ao scroll | Brightline (draftly) |
+| [`odonto/`](odonto/) · Clara Odontologia | Odontologia | Molar inferior 3D com anatomia real (5 cúspides, sulcos, 2 raízes) que se abre em camadas (esmalte, dentina, polpa, raiz) em 3 vistas presas ao scroll | Brightline (draftly) |
 | [`estetica/`](estetica/) · Ateliê Derme | Estética avançada | Vidro 3D com refração: bolhas, frasco numa caixa de vidro, um objeto por linha de cuidado | Polpharma Biologics |
 | [`solar/`](solar/) · Meridia Energia | Energia solar (coringa) | Relógio solar de 24 h que marca a hora real de POA; formas mudam por etapa; camadas se abrem em 3D; simulador | anime.js |
 
@@ -52,3 +52,9 @@ pessoa já está interagindo. Até lá, cada showcase mostra uma imagem estátic
 3. No `main.js`: `initBase()`, `detectQuality()` e `whenEngaged(() => import('./scene.js'))`.
 4. Tarja de demonstração, `noindex` e dados estruturados (`application/ld+json`) no `<head>`.
 5. Rodar o Lighthouse mobile antes de publicar.
+
+## Modelo do molar
+
+O dente do odonto sai de `tools/molar.mjs`: a anatomia é descrita em funções de distância, cada camada vira malha
+(marching cubes), é simplificada e salva comprimida em `public/odonto/molar.glb` (~150 KB). Pra mexer no formato,
+edita o script e roda `node tools/molar.mjs`.

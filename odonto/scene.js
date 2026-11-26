@@ -1,17 +1,15 @@
-// Cena do odonto: um molar de "massinha" feito só em código.
+// Cena do odonto: um 1º molar inferior com anatomia de verdade (gerado por tools/molar.mjs).
 // Vista 1: dente inteiro sob a luz. Vista 2: camadas separadas, com nome.
 // Vista 3: dente montado de novo, brilhando.
 import {
   Group,
   Mesh,
-  SphereGeometry,
-  LatheGeometry,
   IcosahedronGeometry,
   PlaneGeometry,
-  Vector2,
   Vector3,
+  Color,
+  BufferAttribute,
   MeshStandardMaterial,
-  MeshPhysicalMaterial,
   MeshBasicMaterial,
   SpriteMaterial,
   Sprite,
@@ -22,61 +20,11 @@ import {
   CanvasTexture,
   SRGBColorSpace,
 } from 'three';
-import { mergeVertices } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { createStage, toScreen } from '../base/stage.js';
 import { clayNoise, softShadow, glow } from '../base/textures.js';
 import { range, smooth } from '../base/scroll.js';
-
-const CUSPS = [
-  [0.5, 0.75, 0.42],
-  [-0.5, 0.75, 0.42],
-  [0.5, 0.75, -0.42],
-  [-0.5, 0.75, -0.42],
-].map(([x, y, z]) => new Vector3(x, y, z).normalize());
-
-// Coroa do molar: esfera deformada com 4 cúspides, sulco central e colo mais fino.
-function crownGeometry(detail) {
-  let g = new SphereGeometry(1, detail * 2, detail);
-  g.deleteAttribute('uv');
-  g.deleteAttribute('normal');
-  g = mergeVertices(g);
-  const pos = g.attributes.position;
-  const n = new Vector3();
-  for (let i = 0; i < pos.count; i++) {
-    n.fromBufferAttribute(pos, i).normalize();
-    let r = 1;
-    for (const c of CUSPS) r += 0.26 * Math.exp(-n.distanceToSquared(c) / 0.034);
-    if (n.y > 0) {
-      r -= 0.16 * n.y * Math.exp(-(n.x * n.x + n.z * n.z) / 0.035);
-      // sulcos em cruz entre as cúspides
-      r -= 0.05 * n.y * n.y * (Math.exp(-(n.x * n.x) / 0.01) + Math.exp(-(n.z * n.z) / 0.01));
-    }
-    let x = n.x * r;
-    let y = n.y * r;
-    let z = n.z * r * 0.9;
-    y = y > 0 ? y * 0.66 : y * 0.62;
-    if (y < 0) {
-      const k = 1 + y * 0.38;
-      x *= k;
-      z *= k;
-    }
-    pos.setXYZ(i, x, y, z);
-  }
-  g.computeVertexNormals();
-  return g;
-}
-
-// Raiz cônica levemente curva.
-function rootGeometry(length = 1.55, radius = 0.34, segs = 28) {
-  const pts = [];
-  const steps = 14;
-  for (let i = 0; i <= steps; i++) {
-    const t = i / steps; // 0 = ponta, 1 = base
-    const r = radius * Math.pow(Math.sin((t * Math.PI) / 2), 0.7) + 0.002;
-    pts.push(new Vector2(r, -length + t * (length + 0.05)));
-  }
-  return new LatheGeometry(pts, segs);
-}
 
 // Pedrinha de massinha: icosaedro amassado por um ruído simples.
 function pebbleGeometry(seed) {
@@ -130,52 +78,57 @@ export function startScene(host, quality, state, labelsEl) {
   rim.position.set(-4, 2, -3);
   scene.add(rim);
 
-  // Materiais
-  const enamelMat = high
-    ? new MeshPhysicalMaterial({ color: 0xf7f2e8, roughness: 0.34, clearcoat: 0.55, clearcoatRoughness: 0.3 })
-    : new MeshStandardMaterial({ color: 0xf7f2e8, roughness: 0.36 });
-  const rootMat = new MeshStandardMaterial({ color: 0xecdcc0, roughness: 0.62 });
-  const dentinMat = new MeshStandardMaterial({ color: 0xf2cf88, roughness: 0.72 });
+  // Materiais: esmalte claro e brilhante, cemento e dentina amarelados, polpa avermelhada.
+  const enamelMat = new MeshStandardMaterial({ vertexColors: true, roughness: high ? 0.17 : 0.22, envMapIntensity: 1.3 });
+  const rootMat = new MeshStandardMaterial({ vertexColors: true, roughness: 0.42 });
+  const dentinMat = new MeshStandardMaterial({ color: 0xf0d39e, roughness: 0.55 });
   const pulpMat = new MeshStandardMaterial({
-    color: 0xe8765a,
-    roughness: 0.5,
-    emissive: 0x7a2412,
+    color: 0xd45a44,
+    roughness: 0.42,
+    emissive: 0x6e1e10,
     emissiveIntensity: 0.25,
   });
   const noise = quality.tier === 'low' ? null : clayNoise();
-
   enamelMat.emissive.setHex(0xfff2d6);
 
-  // Dente
+  // Dente: as 4 camadas vêm prontas no molar.glb e entram quando carregam.
   const tooth = new Group();
   scene.add(tooth);
-  const crownGeo = crownGeometry(detail);
-
-  const enamel = new Mesh(crownGeo, enamelMat);
-  const dentin = new Mesh(crownGeo, dentinMat);
-  dentin.scale.setScalar(0.8);
-
+  const enamel = new Group();
+  const dentin = new Group();
   const pulp = new Group();
-  const pulpCore = new Mesh(crownGeo, pulpMat);
-  pulpCore.scale.set(0.42, 0.36, 0.42);
-  pulp.add(pulpCore);
-  for (const s of [-1, 1]) {
-    const canal = new Mesh(rootGeometry(1.25, 0.075, 12), pulpMat);
-    canal.position.set(s * 0.33, -0.18, 0);
-    canal.rotation.z = s * 0.12;
-    pulp.add(canal);
-  }
-
   const roots = new Group();
-  for (const s of [-1, 1]) {
-    const root = new Mesh(rootGeometry(), rootMat);
-    root.position.set(s * 0.36, -0.22, 0);
-    root.rotation.z = s * 0.13;
-    roots.add(root);
-  }
-
   tooth.add(roots, pulp, dentin, enamel);
   const parts = { enamel, dentin, pulp, root: roots };
+
+  // Cor por altura: esmalte mais branco nas cúspides e mais quente no colo;
+  // raiz mais clara no colo e mais escura no ápice.
+  const shade = (geo, stops) => {
+    const pos = geo.attributes.position;
+    const col = new Float32Array(pos.count * 3);
+    const c = new Color();
+    const lo = new Color(stops[0][1]);
+    const hi = new Color(stops[1][1]);
+    for (let i = 0; i < pos.count; i++) {
+      const k = MathUtils.smoothstep(pos.getY(i), stops[0][0], stops[1][0]);
+      c.copy(lo).lerp(hi, k);
+      col.set([c.r, c.g, c.b], i * 3);
+    }
+    geo.setAttribute('color', new BufferAttribute(col, 3));
+  };
+  const mats = { enamel: enamelMat, dentin: dentinMat, pulp: pulpMat, root: rootMat };
+  new GLTFLoader()
+    .setMeshoptDecoder(MeshoptDecoder)
+    .load(`${import.meta.env.BASE_URL}odonto/molar.glb`, (gltf) => {
+      gltf.scene.traverse((o) => {
+        if (!o.isMesh) return;
+        const name = o.name in mats ? o.name : o.parent?.name;
+        if (name === 'enamel') shade(o.geometry, [[-0.1, 0xead9b6], [0.6, 0xf7f4ee]]);
+        if (name === 'root') shade(o.geometry, [[-1.9, 0xd8bd8a], [-0.2, 0xefe1c2]]);
+        o.material = mats[name];
+        parts[name]?.add(o.clone());
+      });
+    });
 
   // Sombra de contato no "chão"
   const shadow = new Mesh(
