@@ -648,8 +648,16 @@ input[type='range']::-moz-range-thumb {
 .cta-side .lead {
   margin-bottom: 10px;
 }
-.cta-side .btn-wa {
+.cta-side .btn-wa,
+.cta-side .chip {
+  width: 100%;
   max-width: 380px;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.cta-side .chip {
+  padding-block: 17px;
+  border-radius: 8px;
 }
 /* Relatório mensal de exemplo */
 .report {
