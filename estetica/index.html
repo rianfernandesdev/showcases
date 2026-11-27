@@ -115,7 +115,7 @@
       Clínica fictícia · showcase do <strong>Site AI-Ready</strong><span class="demo-more">, feito em código. Nomes, números e endereço são de exemplo</span>.
     </div>
 
-    <div class="scene" id="scene" aria-hidden="true"><picture class="poster-img poster-cover"><source media="(max-width: 720px)" srcset="/estetica/poster-mob.webp" /><img src="/estetica/poster-desk.webp" alt="" fetchpriority="high" decoding="async" /></picture></div>
+    <div class="scene" id="scene" aria-hidden="true"><picture class="poster-img poster-anchor"><source media="(max-aspect-ratio: 3/5)" srcset="/estetica/poster-mob.webp" /><source media="(max-aspect-ratio: 4/5)" srcset="/estetica/poster-tab.webp" /><img src="/estetica/poster-desk.webp" alt="" fetchpriority="high" decoding="async" /></picture></div>
 
     <header class="hdr" id="topo">
       <a class="brand" href="#topo">
@@ -344,12 +344,27 @@
       <section class="cta" id="contato" aria-labelledby="ct-title">
         <div class="cta-bubbles" id="cta-bubbles" aria-hidden="true"></div>
         <div class="cta-in">
-          <p class="kicker" data-reveal><i></i>Agendar</p>
-          <h2 id="ct-title" class="display-2" data-split data-reveal>O primeiro passo <em>é uma conversa.</em></h2>
-          <div class="cta-row" data-reveal>
-            <a class="btn" href="#" data-demo>Agendar pelo WhatsApp</a>
-            <span class="status" data-open="yes"><i></i><span data-open-status>Aberto agora</span></span>
+          <div class="cta-copy">
+            <p class="kicker" data-reveal><i></i>Agendar</p>
+            <h2 id="ct-title" class="display-2" data-split data-reveal>O primeiro passo <em>é uma conversa.</em></h2>
+            <div class="cta-row" data-reveal>
+              <a class="btn btn-wa" href="#" data-demo><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.2a9.7 9.7 0 0 0-8.4 14.6L2.3 21.7l5-1.3A9.7 9.7 0 1 0 12 2.2zm0 17.7c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1-.8-.3-1.8-.9-2.6-2.1-.2-.3 0-.4.1-.6l.4-.5.2-.4v-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.3c.1.2 1.6 2.5 3.9 3.5 1.5.6 2 .7 2.7.6.4-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.5-.3z"/></svg>Agendar pelo WhatsApp</a>
+              <span class="status" data-open="yes"><i></i><span data-open-status>Aberto agora</span></span>
+            </div>
           </div>
+          <article class="eval" data-reveal style="--d: 1" aria-labelledby="ev-title">
+            <header>
+              <h3 id="ev-title">Como é a avaliação</h3>
+              <span>60 min</span>
+            </header>
+            <ol>
+              <li><b>01</b><div><strong>Conversa</strong><p>Histórico, rotina e o que você não quer mudar.</p></div></li>
+              <li><b>02</b><div><strong>Análise da pele</strong><p>Com luz polarizada, pra ver o que o espelho não mostra.</p></div></li>
+              <li><b>03</b><div><strong>Fotos de referência</strong><p>Mesma luz e mesmo ângulo, pra comparar depois.</p></div></li>
+              <li><b>04</b><div><strong>Plano por escrito</strong><p>Sessões, intervalos e recuperação. Você leva pra casa.</p></div></li>
+            </ol>
+            <p class="eval-foot">Sem procedimento no dia. O valor da avaliação é abatido se você fechar o protocolo em até 30 dias.</p>
+          </article>
         </div>
       </section>
     </main>

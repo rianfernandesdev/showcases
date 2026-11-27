@@ -14,6 +14,9 @@ import {
   DirectionalLight,
   PointLight,
   MathUtils,
+  PlaneGeometry,
+  MeshBasicMaterial,
+  Color,
 } from 'three';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 import { createStage, anchorToElement } from '../base/stage.js';
@@ -81,30 +84,54 @@ function dropGeometry() {
   return new LatheGeometry(pts, 64);
 }
 
-// Fundo com uma luz rosada no meio: é o que o vidro refrata.
-function radialBackground() {
+const BG = 0x1c0b14;
+const BG_SPAN = 24; // lado do quadrado do fundo, em unidades da cena (unit)
+const BG_Z = -6;
+
+// Fundo com uma luz rosada: é o que o vidro refrata. Fica num plano medido na mesma
+// unidade das bolhas, então a imagem de abertura (poster) bate com o 3D em qualquer tela.
+// gx, gy, r: centro e raio do brilho, em unit, a partir da origem do quadro.
+function glowTexture(gx, gy, r) {
+  const N = 1024;
   const c = document.createElement('canvas');
-  c.width = 512;
-  c.height = 512;
+  c.width = c.height = N;
   const ctx = c.getContext('2d');
   ctx.fillStyle = '#1c0b14';
-  ctx.fillRect(0, 0, 512, 512);
-  const g = ctx.createRadialGradient(330, 200, 10, 300, 230, 380);
+  ctx.fillRect(0, 0, N, N);
+  const px = (v) => (v / BG_SPAN) * N;
+  const cx = N / 2 + px(gx);
+  const cy = N / 2 - px(gy);
+  const g = ctx.createRadialGradient(cx, cy, 2, cx - px(0.3), cy + px(0.3), px(r));
   g.addColorStop(0, '#7a3c55');
   g.addColorStop(0.35, '#4c2236');
   g.addColorStop(1, 'rgba(28,11,20,0)');
   ctx.fillStyle = g;
-  ctx.fillRect(0, 0, 512, 512);
+  ctx.fillRect(0, 0, N, N);
   const t = new CanvasTexture(c);
   t.colorSpace = SRGBColorSpace;
   return t;
+}
+
+// Sorteio com semente: as bolhinhas nascem sempre no mesmo lugar (igual ao poster).
+function seeded(seed) {
+  return () => {
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
 }
 
 export function startScene(host, quality, state) {
   const stage = createStage(host, quality, { fov: 30, envIntensity: 1, exposure: 1.05, transparent: false });
   const { scene, camera, pointer } = stage;
   const reduce = quality.reduce;
-  scene.background = radialBackground();
+  scene.background = new Color(BG);
+  const bgMat = new MeshBasicMaterial({ toneMapped: false, depthWrite: false });
+  const bg = new Mesh(new PlaneGeometry(1, 1), bgMat);
+  bg.renderOrder = -1;
+  scene.add(bg);
+  let bgMode = '';
   camera.position.set(0, 0, DIST);
 
   const key = new DirectionalLight(0xfff1ea, 2.2);
@@ -126,15 +153,18 @@ export function startScene(host, quality, state) {
   const bigB = new Mesh(sphereGeo, glass);
   intro.add(bigA, bigB);
 
+  // Bolhinhas: no PC só na metade direita (o texto fica à esquerda); no celular só
+  // na parte de cima (o texto fica embaixo). Nunca passam por trás do texto.
   const drops = [];
-  for (let i = 0; i < (quality.tier === 'low' ? 8 : 16); i++) {
+  const rnd = seeded(7);
+  for (let i = 0; i < 12; i++) {
     const m = new Mesh(sphereGeo, glass);
     m.userData = {
-      x: (Math.random() - 0.5) * 9,
-      z: (Math.random() - 0.5) * 3,
-      speed: 0.12 + Math.random() * 0.25,
-      off: Math.random() * 10,
-      s: 0.05 + Math.random() * 0.09,
+      x: rnd(),
+      z: (rnd() - 0.5) * 3,
+      speed: 0.12 + rnd() * 0.25,
+      off: rnd() * 10,
+      s: 0.05 + rnd() * 0.09,
     };
     m.scale.setScalar(m.userData.s);
     intro.add(m);
@@ -217,43 +247,65 @@ export function startScene(host, quality, state) {
     camera.position.y = pointer.y * 0.18;
     camera.lookAt(0, 0, 0);
 
+    // Quadro de referência: no PC a medida vem da altura e a origem é o centro da tela;
+    // no celular a medida vem da largura e a origem é o topo da tela.
+    const halfH = Math.tan((camera.fov * Math.PI) / 360) * DIST;
+    const halfW = halfH * (W / H);
+    // no retrato a medida é a largura, mas no máximo 60% da altura (tablet em pé não
+    // deixa as bolhas descerem até o texto). base.css .poster-anchor usa a mesma regra.
+    const u = narrow ? (Math.min(W, 0.6 * H) / H) * (halfH * 2) / 5.4 : (Math.min(halfW, halfH) * 2) / 5.4;
+    const oy = narrow ? halfH : 0;
+    const mode = narrow ? 'n' : 'w';
+    if (mode !== bgMode) {
+      bgMode = mode;
+      bgMat.map?.dispose();
+      bgMat.map = narrow ? glowTexture(0.75, -4.1, 7) : glowTexture(1.2, 0.6, 4.3);
+      bgMat.needsUpdate = true;
+    }
+    const k = (DIST - BG_Z) / DIST; // o plano está mais longe: aumenta na mesma proporção
+    bg.position.set(0, oy * k, BG_Z);
+    bg.scale.set(BG_SPAN * u * k, BG_SPAN * u * k, 1);
+
     // ---- Abertura
     const a = anchorToElement(introPin, camera, W, H, DIST);
     intro.visible = product.visible = a.onScreen;
     if (a.onScreen) {
       const p = state.intro;
       const out = smooth(range(p, 0.25, 0.75));
-      const unit = a.size / 5.4; // tamanho relativo à tela
-      intro.position.set(a.x, a.y, 0);
+      const unit = narrow ? u : a.size / 5.4; // tamanho relativo à tela
+      const top = a.y + halfH; // topo da abertura
+      intro.position.set(a.x, narrow ? top : a.y, 0);
       const ax = narrow ? 0.35 : 1.5;
-      const ay = narrow ? 0.85 : 0.25;
+      const ay = narrow ? -3.0 : 0.25;
       bigA.position.set(
         (ax + Math.sin(tt * 0.3) * 0.08 - out * (narrow ? 1.2 : 3.2)) * unit,
         (ay + Math.cos(tt * 0.4) * 0.08 + out * 2.2) * unit,
         0,
       );
       bigB.position.set(
-        (ax + (narrow ? -0.55 : 1.15) + Math.cos(tt * 0.35) * 0.1 + out * 1.8) * unit,
-        (ay - (narrow ? 0.85 : 0.75) + Math.sin(tt * 0.3) * 0.1 + out * 3.4) * unit,
+        (ax + (narrow ? -0.7 : 1.15) + Math.cos(tt * 0.35) * 0.1 + out * 1.8) * unit,
+        (ay - (narrow ? 0.7 : 0.75) + Math.sin(tt * 0.3) * 0.1 + out * 3.4) * unit,
         -0.6,
       );
-      const sA = (narrow ? 0.95 : 1.35) * unit * (1 - out * 0.35);
-      const sB = (narrow ? 0.8 : 1.15) * unit * (1 - out * 0.35);
+      const sA = (narrow ? 1.15 : 1.35) * unit * (1 - out * 0.35);
+      const sB = (narrow ? 0.95 : 1.15) * unit * (1 - out * 0.35);
       bigA.scale.setScalar(sA);
       bigB.scale.setScalar(sB);
       bigA.rotation.y = bigB.rotation.y = tt * 0.1 + pointer.x * 0.3;
 
       drops.forEach((m) => {
         const d = m.userData;
-        const y = ((tt * d.speed + d.off) % 6) - 3;
-        m.position.set((narrow ? d.x * 0.35 : d.x) * unit, y * unit, d.z);
+        const cyc = (tt * d.speed + d.off) % 6; // 0..6, sobe e recomeça
+        const x = narrow ? (d.x - 0.5) * 4.8 : 0.15 + d.x * 4.6;
+        const y = narrow ? -4.6 + cyc * 0.75 : cyc - 3;
+        m.position.set(x * unit, y * unit, d.z);
         m.scale.setScalar(d.s * unit * (1 + out * 0.6));
       });
 
       const inP = smooth(range(p, 0.42, 0.85));
       product.position.set(
         a.x + (narrow ? 0 : 0.6) * unit,
-        a.y + lerp(-3.5, narrow ? -0.35 : 0, inP) * unit,
+        (narrow ? top : a.y) + lerp(narrow ? -9 : -3.5, narrow ? -3.2 : 0, inP) * unit,
         0,
       );
       product.scale.setScalar(unit * (narrow ? 0.8 : 1) * lerp(0.7, 1, inP));

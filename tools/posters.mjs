@@ -9,7 +9,18 @@ const { chromium } = require(process.env.PLAYWRIGHT || 'playwright');
 const sharp = (await import('sharp').catch(() => null))?.default;
 
 const BASE = process.env.BASE || 'http://localhost:4173/showcases';
-const PAGES = { odonto: '#stage', estetica: '#scene', solar: '#instrument' };
+const ALL = { odonto: '#stage', estetica: '#scene', solar: '#instrument' };
+// ONLY=estetica node tools/posters.mjs  -> refaz só uma página
+const PAGES = process.env.ONLY ? { [process.env.ONLY]: ALL[process.env.ONLY] } : ALL;
+// a estética ancora o poster (base.css .poster-anchor): no PC captura bem larga, no celular bem alta,
+// pra cobrir telas mais largas ou mais compridas sem sobrar borda
+const SIZES_BY_PAGE = {
+  estetica: {
+    desk: { viewport: { width: 2000, height: 800 }, deviceScaleFactor: 1.25 },
+    tab: { viewport: { width: 816, height: 1024 }, deviceScaleFactor: 1.5, hasTouch: true },
+    mob: { viewport: { width: 390, height: 940 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true },
+  },
+};
 const SIZES = {
   desk: { viewport: { width: 1280, height: 800 }, deviceScaleFactor: 1.5 },
   mob: { viewport: { width: 390, height: 760 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true },
@@ -19,7 +30,7 @@ const browser = await chromium.launch({
   args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'],
 });
 for (const [page, host] of Object.entries(PAGES)) {
-  for (const [size, opts] of Object.entries(SIZES)) {
+  for (const [size, opts] of Object.entries(SIZES_BY_PAGE[page] || SIZES)) {
     // movimento reduzido: o 3D fica parado no quadro inicial (sem giro nem flutuação)
     const ctx = await browser.newContext({ ...opts, reducedMotion: 'reduce' });
     const pg = await ctx.newPage();

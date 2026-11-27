@@ -111,6 +111,34 @@ ol {
 .poster-cover img {
   object-fit: cover;
 }
+/* Poster ancorado igual ao 3D: no PC a cena se mede pela altura e centraliza;
+   em tela de retrato se mede pela largura e prende no topo. Assim a foto não pula. */
+.poster-anchor {
+  overflow: hidden;
+}
+.poster-anchor img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: auto;
+  height: 100%;
+  max-width: none;
+  transform: translate(-50%, -50%);
+}
+@media (max-aspect-ratio: 4/5) {
+  /* tablet em pé: a cena se mede por 60% da altura; o poster do tablet é capturado em 816x1024 */
+  .poster-anchor img {
+    top: 0;
+    width: 79.7vh;
+    height: auto;
+    transform: translateX(-50%);
+  }
+}
+@media (max-aspect-ratio: 3/5) {
+  .poster-anchor img {
+    width: 100%;
+  }
+}
 .is-ready > .poster-img {
   opacity: 0;
 }
