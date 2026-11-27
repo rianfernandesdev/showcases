@@ -23,8 +23,14 @@ body {
 
 /* Canvas 3D fixo atrás de tudo. Seções escuras são transparentes e deixam ele aparecer. */
 .scene {
+  /* altura da tela cheia e fixa: quando a barra do navegador do celular aparece ou some,
+     o 3D não é refeito (era o que engasgava ao rolar) */
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  height: 100lvh;
   z-index: 0;
   background:
     radial-gradient(90% 70% at 70% 30%, #4a2438 0%, rgba(74, 36, 56, 0) 70%),
@@ -1101,9 +1107,15 @@ em {
   :root {
     --hdr: 60px;
   }
+  /* no celular o título fica logo abaixo das bolhas (que se medem pela largura da tela),
+     e não preso embaixo: em tela baixa ele subia até as bolhas */
   .hero-copy {
     right: var(--gutter);
-    bottom: 40px;
+    top: calc(min(100vw, 60lvh) * 0.9 + 4px);
+    bottom: auto;
+  }
+  .hero-copy .lead {
+    margin: 16px 0 20px;
   }
   .stats {
     top: calc(var(--hdr) + 16px);

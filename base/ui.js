@@ -18,7 +18,12 @@ export function reveal(root = document) {
     },
     { rootMargin: '0px 0px -12% 0px' },
   );
-  els.forEach((el) => io.observe(el));
+  els.forEach((el) => {
+    // o que já está na primeira tela ao abrir aparece direto, mesmo encostado no fim dela
+    // (em celular baixo o botão da abertura ficava nos últimos 12% e nunca aparecia)
+    if (scrollY === 0 && el.getBoundingClientRect().top < innerHeight) el.classList.add('is-in');
+    else io.observe(el);
+  });
 }
 
 // Quebra o texto em palavras pra animar em cascata: [data-split].

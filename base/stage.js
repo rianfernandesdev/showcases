@@ -22,7 +22,7 @@ export function createStage(host, quality, opts = {}) {
   renderer.outputColorSpace = SRGBColorSpace;
   renderer.toneMapping = ACESFilmicToneMapping;
   renderer.toneMappingExposure = opts.exposure ?? 1;
-  let dpr = quality.dpr;
+  let dpr = Math.min(quality.dpr, opts.maxDpr ?? quality.dpr);
   renderer.setPixelRatio(dpr);
   renderer.domElement.className = 'stage-canvas';
   host.appendChild(renderer.domElement);
@@ -66,6 +66,8 @@ export function createStage(host, quality, opts = {}) {
   timer.connect?.(document);
   let frames = 0;
   let slowTime = 0;
+  let windowFrames = 0;
+  let windowSlow = 0;
   let ready = false;
 
   const stage = {
@@ -99,6 +101,20 @@ export function createStage(host, quality, opts = {}) {
       host.classList.add('is-ready');
     }
     // Se os primeiros 90 quadros ficarem lentos, baixa a resolução uma vez.
+    // Depois continua de olho: a cada 120 quadros, se mais da metade engasgou (ex.: rolando
+    // no celular), desce mais um degrau, até 1x.
+    if (frames >= 90 && dpr > 1) {
+      windowFrames++;
+      if (dt > 1 / 40) windowSlow++;
+      if (windowFrames === 120) {
+        if (windowSlow > 60) {
+          dpr = dpr > 1.5 ? 1.5 : 1;
+          renderer.setPixelRatio(dpr);
+          resize();
+        }
+        windowFrames = windowSlow = 0;
+      }
+    }
     if (frames < 90) {
       frames++;
       if (dt > 1 / 40) slowTime++;

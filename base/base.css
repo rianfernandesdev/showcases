@@ -130,6 +130,7 @@ ol {
   .poster-anchor img {
     top: 0;
     width: 79.7vh;
+    width: 79.7lvh;
     height: auto;
     transform: translateX(-50%);
   }

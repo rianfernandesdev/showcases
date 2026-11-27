@@ -125,7 +125,8 @@ function seeded(seed) {
 }
 
 export function startScene(host, quality, state) {
-  const stage = createStage(host, quality, { fov: 30, envIntensity: 1, exposure: 1.05, transparent: false });
+  // no celular até 1,5x de nitidez: o vidro de verdade custa, e 1,5x numa tela pequena já fica nítido
+  const stage = createStage(host, quality, { fov: 30, envIntensity: 1, exposure: 1.05, transparent: false, maxDpr: quality.tier === 'mid' ? 1.5 : 2 });
   const { scene, camera, pointer } = stage;
   // no celular a imagem que o vidro refrata é feita em meia resolução: fica igual a olho nu e pesa bem menos
   if (quality.tier === 'mid') stage.renderer.transmissionResolutionScale = 0.5;
@@ -242,8 +243,9 @@ export function startScene(host, quality, state) {
   const tmp = new Vector3();
 
   stage.onFrame = (dt, t) => {
-    const W = innerWidth;
-    const H = innerHeight;
+    // medidas do canvas (que tem a altura da tela cheia, sem mudar quando a barra do navegador some)
+    const W = stage.width;
+    const H = stage.height;
     const narrow = W / H < 0.8;
     const tt = reduce ? 0 : t;
 
@@ -277,7 +279,7 @@ export function startScene(host, quality, state) {
       const p = state.intro;
       const out = smooth(range(p, 0.25, 0.75));
       const unit = narrow ? u : a.size / 5.4; // tamanho relativo à tela
-      const top = a.y + halfH; // topo da abertura
+      const top = halfH - (introPin.getBoundingClientRect().top / H) * 2 * halfH; // topo da abertura
       intro.position.set(a.x, narrow ? top : a.y, 0);
       const ax = narrow ? 0.35 : 1.5;
       const ay = narrow ? -3.0 : 0.25;
