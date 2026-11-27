@@ -859,8 +859,8 @@ em {
 }
 
 /* ---------- Chamada final ---------- */
-/* Duas colunas da mesma altura: à esquerda bolhas em cima e texto embaixo, à direita o card.
-   O topo das bolhas alinha com o topo do card e o status com o fim dele. */
+/* Bolhas numa faixa em cima; embaixo texto à esquerda e card à direita, com o fim do card
+   alinhado ao fim do botão. */
 .cta {
   position: relative;
   min-height: 100vh;
@@ -868,25 +868,28 @@ em {
   align-items: center;
   padding: calc(var(--hdr) + 40px) var(--gutter) clamp(56px, 10vh, 110px);
 }
-.cta-copy {
-  display: flex;
-  flex-direction: column;
-}
 .cta-bubbles {
-  flex: 1;
+  grid-area: bub;
   width: min(100%, 440px);
-  min-height: clamp(180px, 28vh, 300px);
-  margin-bottom: 24px;
+  height: clamp(170px, 26vh, 280px);
   pointer-events: none;
+}
+.cta-copy {
+  grid-area: copy;
+}
+.eval {
+  grid-area: card;
 }
 .cta .display-2 {
   max-width: 11ch;
 }
 .cta-in {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
-  align-items: stretch;
-  gap: clamp(32px, 5vw, 80px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
+  grid-template-areas: 'bub .' 'copy card';
+  align-items: end;
+  column-gap: clamp(32px, 5vw, 80px);
+  row-gap: 16px;
 }
 .cta .btn-wa {
   width: auto;
@@ -899,7 +902,7 @@ em {
 }
 /* Resumo da avaliação: vidro escuro por cima das bolhas */
 .eval {
-  padding: 28px 28px 24px;
+  padding: 22px 24px 18px;
   background: rgba(35, 16, 25, 0.55);
   border: 1px solid var(--line-d);
   border-radius: 24px;
@@ -911,11 +914,11 @@ em {
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
-  padding-bottom: 16px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--line-d);
 }
 .eval h3 {
-  font: 400 28px/1.1 var(--serif);
+  font: 400 25px/1.1 var(--serif);
   letter-spacing: -0.02em;
 }
 .eval header span {
@@ -928,11 +931,13 @@ em {
 }
 .eval ol {
   display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
 }
 .eval li {
   display: grid;
-  grid-template-columns: 36px 1fr;
-  padding: 14px 0;
+  grid-template-columns: 28px 1fr;
+  padding: 12px 0;
   border-bottom: 1px solid rgba(240, 202, 189, 0.08);
 }
 .eval b {
@@ -943,16 +948,17 @@ em {
 }
 .eval strong {
   font-weight: 500;
-  font-size: 17px;
+  font-size: 16px;
 }
 .eval li p {
   margin-top: 2px;
-  font-size: 15.5px;
+  font-size: 14.5px;
+  line-height: 1.4;
   color: rgba(246, 240, 234, 0.72);
 }
 .eval-foot {
-  margin-top: 16px;
-  font-size: 14px;
+  margin-top: 12px;
+  font-size: 13.5px;
   color: rgba(246, 240, 234, 0.62);
 }
 .cta-row {
@@ -1055,6 +1061,8 @@ em {
 @media (max-width: 960px) {
   .cta-in {
     grid-template-columns: 1fr;
+    grid-template-areas: 'bub' 'copy' 'card';
+    row-gap: 32px;
   }
   .eval {
     max-width: 560px;
@@ -1205,17 +1213,21 @@ em {
     grid-template-columns: 1fr;
   }
   .cta-bubbles {
-    flex: none;
-    height: 26vh;
-    min-height: 0;
-    margin-bottom: 8px;
+    height: 24vh;
+  }
+  .cta-in {
+    row-gap: 24px;
+  }
+  .eval ol {
+    column-gap: 14px;
+  }
+  .eval li {
+    grid-template-columns: 1fr;
+    align-content: start;
+    gap: 4px;
   }
   .cta .btn-wa {
     width: 100%;
-  }
-  .cta-in {
-    grid-template-columns: 1fr;
-    gap: 40px;
   }
   .eval {
     padding: 22px 18px 18px;
