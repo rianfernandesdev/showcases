@@ -104,8 +104,10 @@ export function bindOpenStatus(hours, selector = '[data-open-status]') {
       el.closest('[data-open]')?.setAttribute('data-open', s.open ? 'yes' : 'no');
     });
     const { day } = nowInPOA();
-    document.querySelectorAll('[data-day]').forEach((el) => {
-      el.classList.toggle('is-today', +el.dataset.day === day);
+    // data-day="3" (um dia) ou data-days="1,2,3,4,5" (linha que junta vários dias)
+    document.querySelectorAll('[data-day], [data-days]').forEach((el) => {
+      const days = (el.dataset.days ?? el.dataset.day).split(',').map(Number);
+      el.classList.toggle('is-today', days.includes(day));
     });
   };
   paint();

@@ -828,17 +828,18 @@ body {
   font-size: 17px;
 }
 
-/* Rodapé */
+/* Rodapé: uma faixa só no computador */
 .ftr {
-  padding: 72px var(--gutter) 28px;
+  padding: 40px var(--gutter) 22px;
   background: var(--ink);
   color: rgba(245, 239, 230, 0.8);
   font-size: 15px;
 }
-.ftr-grid {
+.ftr-row {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1.1fr 1fr 1fr auto;
+  align-items: start;
+  gap: 32px;
 }
 .brand-light {
   color: var(--cream);
@@ -849,19 +850,16 @@ body {
 .brand-light circle {
   fill: var(--ink);
 }
-.ftr-note {
-  max-width: 34ch;
-  margin-top: 16px;
-}
 .ftr h3 {
-  margin-bottom: 14px;
-  font-size: 15px;
-  color: var(--cream);
+  margin-bottom: 8px;
+  font: 500 11.5px/1 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245, 239, 230, 0.5);
 }
 .ftr .status {
   display: flex;
   width: fit-content;
-  margin: -4px 0 16px;
   padding: 6px 12px;
   font-size: 13px;
   font-weight: 500;
@@ -874,10 +872,14 @@ body {
   background: rgba(74, 163, 122, 0.14);
   border-color: rgba(74, 163, 122, 0.4);
 }
+.hours {
+  max-width: 230px;
+}
 .hours li {
   display: flex;
   justify-content: space-between;
-  padding: 4px 0;
+  gap: 16px;
+  padding: 1px 0;
 }
 .hours li.is-today {
   color: var(--butter);
@@ -885,15 +887,18 @@ body {
 }
 address {
   font-style: normal;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
+}
+.ftr-col a {
+  color: inherit;
 }
 .ftr-base {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 8px;
-  margin-top: 64px;
-  padding-top: 20px;
+  gap: 6px 24px;
+  margin-top: 28px;
+  padding-top: 16px;
   border-top: 1px solid rgba(245, 239, 230, 0.12);
   font: 500 11.5px/1.4 var(--mono);
   letter-spacing: 0.04em;
@@ -904,6 +909,20 @@ address {
 @media (max-width: 1080px) {
   .nav {
     display: none;
+  }
+  /* rodapé no tablet e no celular: marca e status em cima, horário e endereço lado a lado */
+  .ftr-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 20px;
+  }
+  .ftr-row .brand {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .ftr .status {
+    grid-row: 1;
+    grid-column: 2;
+    justify-self: end;
   }
   .cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -999,8 +1018,7 @@ address {
   .cards,
   .team,
   .rule-list,
-  .faq-wrap,
-  .ftr-grid {
+  .faq-wrap {
     grid-template-columns: 1fr;
   }
   .steps {
@@ -1019,6 +1037,22 @@ address {
   }
   .faq-wrap {
     gap: 8px;
+  }
+  .ftr {
+    padding-top: 32px;
+  }
+  .ftr-row {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .ftr .status {
+    grid-row: 2;
+    grid-column: 1;
+    justify-self: start;
+    margin-top: -6px;
+  }
+  .ftr-base {
+    margin-top: 22px;
   }
   .slots {
     grid-template-columns: 1fr 1fr;
