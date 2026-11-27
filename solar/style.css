@@ -492,38 +492,97 @@ input[type='range']::-moz-range-thumb {
   gap: clamp(32px, 5vw, 80px);
   align-items: start;
 }
-/* Card ao lado das perguntas */
+/* Card ao lado das perguntas: canal direto com a engenharia */
 .faq-card {
   position: sticky;
   top: calc(var(--hdr) + 24px);
-  padding: 28px 26px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 6px;
+  padding: 30px 28px 26px;
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(255, 176, 32, 0.16), transparent 60%),
+    var(--panel);
+  border: 1px solid rgba(255, 176, 32, 0.28);
+  border-radius: 10px;
+  box-shadow: 0 30px 60px -40px rgba(255, 106, 43, 0.5);
+}
+.faq-card-k {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.faq-card-k i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #25d366;
+  box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.18);
+}
+.faq-card h3 {
+  margin: 16px 0 10px;
+  font-size: 28px;
+  font-weight: 650;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
 }
 .faq-card > p {
   margin: 0 0 22px;
   color: rgba(236, 235, 231, 0.78);
-  font-size: 17.5px;
+  font-size: 17px;
 }
-.faq-card .chip {
-  width: 100%;
-  justify-content: space-between;
-}
-.faq-facts {
+.faq-steps {
   display: grid;
   gap: 10px;
-  margin-top: 24px;
-  padding-top: 18px;
-  border-top: 1px dashed var(--line);
-  font: 400 13.5px/1.4 var(--mono);
-  color: var(--muted);
+  margin-bottom: 24px;
+  font-size: 16px;
 }
-.faq-facts b {
-  display: inline-block;
-  min-width: 64px;
+.faq-steps li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.faq-steps b {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  font: 600 12px/1 var(--mono);
   color: var(--amber);
+  border: 1px solid rgba(255, 176, 32, 0.45);
+  border-radius: 50%;
+}
+.btn-wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 18px;
   font-weight: 600;
+  font-size: 16.5px;
+  color: #fff;
+  text-decoration: none;
+  background: #1f9d55;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-wa:hover {
+  background: #1a8a4a;
+  transform: translateY(-2px);
+}
+.btn-wa .wa {
+  width: 22px;
+  height: 22px;
+}
+.faq-card small {
+  display: block;
+  margin-top: 12px;
+  text-align: center;
+  font: 400 12.5px/1.4 var(--mono);
+  color: var(--muted);
 }
 .faq details {
   border-top: 1px solid var(--line);
