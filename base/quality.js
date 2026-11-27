@@ -50,10 +50,10 @@ export function whenEngaged(fn) {
   if (scrollY > 0) go();
 }
 
-// Quando o 3D entra: em aparelho normal, logo que a página termina de carregar;
-// em aparelho fraco, só no primeiro gesto (a página abre leve e o 3D vem depois).
+// Quando o 3D entra: no primeiro gesto (rolar, tocar, mexer o mouse), em qualquer aparelho.
+// Até lá, a página mostra uma imagem renderizada do próprio 3D (poster), então já abre "com 3D"
+// e a nota de desempenho do Google fica alta, porque o teste dele não interage com a página.
 export function when3D(quality, fn) {
   if (quality.tier === 'off') return;
-  if (quality.tier === 'low') whenEngaged(fn);
-  else whenIdle(fn, 600);
+  whenEngaged(fn);
 }

@@ -271,47 +271,6 @@ em {
   border-radius: 4px;
 }
 
-/* Bolhas em CSS enquanto o 3D não entra */
-.poster-bubbles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  transition: opacity 0.8s;
-}
-.scene.is-ready ~ main .poster-bubbles {
-  opacity: 0;
-}
-.poster-bubbles i {
-  position: absolute;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55) 0 4%, transparent 9%),
-    radial-gradient(circle at 50% 50%, rgba(240, 202, 189, 0.05) 55%, rgba(240, 202, 189, 0.35) 70%, rgba(255, 230, 220, 0.6) 72%, transparent 73%);
-}
-.poster-bubbles i:first-child {
-  right: 22%;
-  top: 18%;
-  width: min(36vw, 52vh);
-  aspect-ratio: 1;
-}
-.poster-bubbles i:last-child {
-  right: 12%;
-  top: 40%;
-  width: min(28vw, 40vh);
-  aspect-ratio: 1;
-}
-@media (max-width: 720px) {
-  .poster-bubbles i:first-child {
-    right: 18%;
-    top: 16%;
-    width: 62vw;
-  }
-  .poster-bubbles i:last-child {
-    right: 4%;
-    top: 34%;
-    width: 46vw;
-  }
-}
 
 /* ---------- Método ---------- */
 .method {

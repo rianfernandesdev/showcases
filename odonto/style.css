@@ -310,16 +310,6 @@ body {
   position: absolute;
   inset: 0;
 }
-.stage .poster {
-  position: absolute;
-  inset: 18% 22%;
-  width: 56%;
-  height: 64%;
-  transition: opacity 0.6s;
-}
-.stage.is-ready .poster {
-  opacity: 0;
-}
 .tag {
   position: absolute;
   z-index: 3;

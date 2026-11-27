@@ -51,11 +51,7 @@
       <!-- TOUR: o instrumento fica preso à direita enquanto as etapas passam -->
       <div class="tour" id="etapas">
         <div class="instrument" id="instrument" aria-hidden="true">
-          <svg class="poster" viewBox="0 0 200 200">
-            <circle cx="100" cy="100" r="88" fill="none" stroke="#ffb020" stroke-width="3" stroke-dasharray="20 3" />
-            <circle cx="100" cy="100" r="74" fill="#232221" />
-            <circle cx="100" cy="100" r="40" fill="#ff6a2b" opacity=".85" />
-          </svg>
+          <picture class="poster-img poster-contain"><source media="(max-width: 760px)" srcset="/solar/poster-mob.webp" /><img src="/solar/poster-desk.webp" alt="" fetchpriority="high" decoding="async" /></picture>
           <div class="readout">
             <span>POA <b data-clock>00:00:00</b></span>
             <span>ETAPA <b data-step>00</b>/04</span>

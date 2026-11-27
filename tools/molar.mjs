@@ -97,14 +97,15 @@ function crown(x, y, z) {
   let d = roundBox(cx, y - 0.32, cz, 0.5, 0.12, 0.38, 0.36) * s;
   for (const c of CUSPS) d = smin(d, ellipsoid(x, y, z, ...c), 0.16);
   // fossas e sulcos da face oclusal
-  d = smax(d, -ellipsoid(x, y, z, 0.0, 0.93, -0.02, 0.24, 0.14, 0.18), 0.1);
+  d = smax(d, -ellipsoid(x, y, z, 0.0, 0.97, -0.02, 0.24, 0.11, 0.18), 0.1);
   d = smax(d, -ellipsoid(x, y, z, -0.66, 0.86, 0.0, 0.14, 0.1, 0.18), 0.08);
   d = smax(d, -ellipsoid(x, y, z, 0.66, 0.82, -0.02, 0.12, 0.09, 0.16), 0.08);
   const g = 0.045;
-  d = smax(d, -capsule(x, y, z, [-0.66, 0.86, 0.02], [0.66, 0.84, -0.04], g), 0.1); // sulco central
-  d = smax(d, -capsule(x, y, z, [-0.14, 0.86, 0.0], [-0.17, 0.58, 0.9], g), 0.1); // vestibular mesial
-  d = smax(d, -capsule(x, y, z, [0.4, 0.84, -0.02], [0.47, 0.52, 0.78], g), 0.1); // vestibular distal
-  d = smax(d, -capsule(x, y, z, [0.0, 0.86, -0.02], [-0.01, 0.62, -0.88], g), 0.1); // lingual
+  d = smax(d, -capsule(x, y, z, [-0.66, 0.9, 0.02], [0.66, 0.88, -0.04], g), 0.14); // sulco central
+  // sulcos laterais afinam até sumir na face, sem terminar num "furo"
+  d = smax(d, -roundCone(x, y, z, [-0.14, 0.9, 0.0], [-0.16, 0.76, 0.6], g, 0.004), 0.1); // vestibular mesial
+  d = smax(d, -roundCone(x, y, z, [0.4, 0.88, -0.02], [0.45, 0.74, 0.56], g, 0.004), 0.1); // vestibular distal
+  d = smax(d, -roundCone(x, y, z, [0.0, 0.9, -0.02], [-0.01, 0.78, -0.6], g, 0.004), 0.1); // lingual
   return d;
 }
 
