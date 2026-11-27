@@ -66,3 +66,7 @@ O 3D de verdade entra no primeiro gesto (rolar, tocar, mexer o mouse) e aparece 
 e a nota de desempenho do Google fica alta, porque o teste dele não interage com a página.
 
 Mexeu numa cena 3D? Gera as imagens de novo: `npx vite build && npx vite preview --port 4173` e, em outro terminal, `node tools/posters.mjs`.
+
+## Capas da página inicial
+
+As capas dos cards da página inicial (`public/capas/*.webp`) são prints da abertura de cada showcase no PC, com o 3D carregado. Mudou a abertura de algum? Com o preview rodando, `node tools/capas.mjs` (ou `ONLY=estetica node tools/capas.mjs` pra refazer uma só).
