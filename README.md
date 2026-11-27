@@ -58,3 +58,11 @@ pessoa já está interagindo. Até lá, cada showcase mostra uma imagem estátic
 O dente do odonto sai de `tools/molar.mjs`: a anatomia é descrita em funções de distância, cada camada vira malha
 (marching cubes), é simplificada e salva comprimida em `public/odonto/molar.glb` (~150 KB). Pra mexer no formato,
 edita o script e roda `node tools/molar.mjs`.
+
+## Imagem de abertura (poster)
+
+Cada showcase abre com uma imagem do primeiro quadro do próprio 3D (`public/<showcase>/poster-desk.webp` e `poster-mob.webp`).
+O 3D de verdade entra no primeiro gesto (rolar, tocar, mexer o mouse) e aparece por cima dela. Assim a página já abre "com 3D"
+e a nota de desempenho do Google fica alta, porque o teste dele não interage com a página.
+
+Mexeu numa cena 3D? Gera as imagens de novo: `npx vite build && npx vite preview --port 4173` e, em outro terminal, `node tools/posters.mjs`.
