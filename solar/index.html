@@ -27,6 +27,62 @@
         ]
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Meu telhado aguenta?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A visita técnica avalia a estrutura antes do projeto. Quando o telhado não aguenta, a usina pode ir pro solo ou pra uma cobertura de estacionamento."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "E a Lei 14.300?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ela mudou a compensação pra quem entrou depois de 2023: parte da tarifa (o fio B) passa a ser paga aos poucos. O simulador e o projeto já descontam isso."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Dá pra financiar?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sim, com linhas de bancos e cooperativas pra energia renovável. Em muitos casos a parcela fica perto da economia do mês."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quanto tempo leva do contrato à geração?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende do tamanho e da concessionária. O cronograma sai no projeto, com o prazo de cada etapa da homologação."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "E em dia nublado ou à noite?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A usina gera menos com nuvem e nada à noite. O que sobra nos dias de sol vira crédito na conta de luz e abate o consumo dos outros dias."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quem cuida da usina depois de pronta?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A gente. O monitoramento é diário e, se algum inversor cair, a equipe é avisada antes de a geração do mês ser afetada."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div class="demo-bar">
@@ -173,6 +229,7 @@
       <section class="faq-sec" id="duvidas" aria-labelledby="d-title">
         <span class="step-k" data-reveal>Dúvidas</span>
         <h2 id="d-title" class="h2" data-split data-reveal>Antes de pedir a proposta.</h2>
+        <div class="faq-grid">
         <div class="faq" data-reveal>
           <details open>
             <summary>Meu telhado aguenta?</summary>
@@ -190,6 +247,25 @@
             <summary>Quanto tempo leva do contrato à geração?</summary>
             <p>Depende do tamanho e da concessionária. O cronograma sai no projeto, com o prazo de cada etapa da homologação.</p>
           </details>
+          <details>
+            <summary>E em dia nublado ou à noite?</summary>
+            <p>A usina gera menos com nuvem e nada à noite. O que sobra nos dias de sol vira crédito na conta de luz e abate o consumo dos outros dias.</p>
+          </details>
+          <details>
+            <summary>Quem cuida da usina depois de pronta?</summary>
+            <p>A gente. O monitoramento é diário e, se algum inversor cair, a equipe é avisada antes de a geração do mês ser afetada.</p>
+          </details>
+        </div>
+        <aside class="faq-card" data-reveal style="--d: 1" aria-label="Falar com a engenharia">
+          <span class="step-k">Sua dúvida não está aqui?</span>
+          <p>Manda a fatura no WhatsApp. A engenharia responde com a estimativa do seu caso e tira a dúvida junto.</p>
+          <a class="chip chip-hot" href="#" data-demo="Demonstração: no site real, este botão abre o WhatsApp da engenharia.">enviar fatura no WhatsApp <span aria-hidden="true">↗</span></a>
+          <ul class="faq-facts">
+            <li><b>25</b> anos de garantia de geração</li>
+            <li><b>diário</b> monitoramento da usina</li>
+            <li><b>RS</b> atendimento em todo o estado</li>
+          </ul>
+        </aside>
         </div>
       </section>
 
