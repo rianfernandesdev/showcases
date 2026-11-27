@@ -179,6 +179,9 @@ body {
 .hl {
   color: var(--coral-d);
 }
+#hero-title .hl {
+  display: block;
+}
 .kicker,
 .frame-k,
 .tag,
@@ -193,11 +196,20 @@ body {
   margin-bottom: 18px;
   color: var(--coral-d);
 }
+@media (min-width: 821px) {
+  .kicker {
+    font-size: 14px;
+  }
+  .frame-k,
+  .tag {
+    font-size: 12.5px;
+  }
+}
 .lead,
 .sec-lead {
   max-width: 34ch;
   color: var(--muted);
-  font-size: clamp(16px, 1.35vw, 19px);
+  font-size: clamp(17px, 1.45vw, 21px);
 }
 .sec-lead {
   max-width: 46ch;
@@ -261,7 +273,7 @@ body {
   flex-wrap: wrap;
   gap: 8px 20px;
   margin-top: 28px;
-  font-size: 14px;
+  font-size: 15.5px;
   color: var(--muted);
 }
 .facts li::before {
@@ -426,7 +438,7 @@ body {
   font-weight: 700;
 }
 .frame p {
-  font-size: 14.5px;
+  font-size: 16px;
   color: var(--muted);
 }
 .ticks {
@@ -461,7 +473,7 @@ body {
   background: var(--paper);
 }
 .sec-head {
-  max-width: 760px;
+  max-width: none;
   margin-bottom: clamp(36px, 5vw, 64px);
 }
 .cards {
@@ -490,7 +502,7 @@ body {
 }
 .card p {
   color: var(--muted);
-  font-size: 15.5px;
+  font-size: 17px;
 }
 .card dl {
   display: flex;
@@ -500,7 +512,7 @@ body {
   border-top: 1px dashed var(--line);
 }
 .card dt {
-  font: 500 10.5px/1 var(--mono);
+  font: 500 12px/1 var(--mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
@@ -508,7 +520,7 @@ body {
 .card dd {
   margin-top: 6px;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 16.5px;
 }
 /* Ícone de traço em selo colorido (os cards não carregam 3D) */
 .ico {
@@ -570,7 +582,7 @@ body {
   color: var(--butter);
 }
 .rule .display-2 {
-  max-width: 12ch;
+  font-size: clamp(38px, 4.6vw, 72px);
 }
 .rule-list {
   display: grid;
@@ -580,10 +592,11 @@ body {
 }
 .rule-list li {
   display: grid;
+  align-content: start;
   gap: 14px;
   padding-top: 18px;
   border-top: 1px solid rgba(245, 239, 230, 0.18);
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.4;
 }
 .rule-list b {
@@ -622,7 +635,7 @@ body {
 }
 .steps p {
   color: var(--muted);
-  font-size: 15.5px;
+  font-size: 17px;
   max-width: 28ch;
 }
 
@@ -672,7 +685,7 @@ body {
 }
 .team p {
   color: var(--muted);
-  font-size: 15px;
+  font-size: 16.5px;
 }
 .team small {
   font: 500 11px/1 var(--mono);
@@ -689,7 +702,7 @@ body {
     var(--cream);
 }
 .book-in {
-  max-width: 1080px;
+  max-width: 1240px;
   margin: 0 auto;
   text-align: center;
 }
@@ -769,8 +782,11 @@ body {
 /* Dúvidas */
 .faq-wrap {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: 48px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+.faq {
+  max-width: 920px;
 }
 .faq details {
   border-bottom: 1px solid var(--line);
@@ -809,6 +825,7 @@ body {
 .faq details p {
   padding: 0 48px 24px 0;
   color: var(--muted);
+  font-size: 17px;
 }
 
 /* Rodapé */
@@ -1009,28 +1026,7 @@ address {
   .slots li:last-child:nth-child(odd) {
     grid-column: 1 / -1;
   }
-  .wa-preview {
-  max-width: 520px;
-  margin: 0 auto 28px;
-}
-.wa-preview figcaption {
-  margin-bottom: 10px;
-  font: 500 11px/1 var(--mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.wa-preview p {
-  position: relative;
-  display: inline-block;
-  padding: 12px 16px;
-  text-align: left;
-  font-size: 16px;
-  background: #dcf8c6;
-  border-radius: 16px 16px 4px 16px;
-  box-shadow: 0 10px 24px -18px rgba(20, 40, 20, 0.6);
-}
-.btn-wa {
+  .btn-wa {
     width: 100%;
   }
   .faq summary {
