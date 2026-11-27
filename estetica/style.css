@@ -259,17 +259,6 @@ em {
   text-transform: uppercase;
   opacity: calc(1 - var(--p, 0) * 6);
 }
-.badge {
-  position: absolute;
-  right: var(--gutter);
-  bottom: 18px;
-  padding: 4px 8px;
-  font: 600 9.5px/1 var(--sans);
-  letter-spacing: 0.12em;
-  color: rgba(246, 240, 234, 0.6);
-  border: 1px solid var(--line-d);
-  border-radius: 4px;
-}
 
 
 /* ---------- Método ---------- */
@@ -315,8 +304,9 @@ em {
   position: absolute;
   inset: 0;
   display: grid;
-  align-content: center;
-  gap: 28px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 440px);
+  align-items: center;
+  gap: clamp(32px, 5vw, 80px);
   opacity: 0;
   transition: opacity 0.6s;
   pointer-events: none;
@@ -326,14 +316,17 @@ em {
 }
 .verb strong {
   display: block;
-  font-size: clamp(56px, 10vw, 168px);
+  font-size: clamp(56px, 7.4vw, 150px);
   line-height: 0.9;
   transform: translateY(40px);
   transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.verb p {
+.verb-text {
+  display: grid;
+  gap: 28px;
+}
+.verb-text p {
   max-width: 30ch;
-  margin-left: max(0px, 46%);
   font: 300 clamp(20px, 2vw, 30px) / 1.25 var(--serif);
   letter-spacing: -0.01em;
   transform: translateY(40px);
@@ -344,7 +337,8 @@ em {
   color: #a4452f;
 }
 .verb.is-on strong,
-.verb.is-on p {
+.verb.is-on .verb-text p,
+.verb.is-on .proof {
   transform: none;
   opacity: 1;
 }
@@ -359,6 +353,166 @@ em {
   color: var(--muted);
   border-top: 1px solid var(--line-l);
   padding-top: 14px;
+}
+
+/* Card de exemplo de cada verbo */
+.proof {
+  padding: 24px 24px 20px;
+  background: #fff;
+  border: 1px solid var(--line-l);
+  border-radius: 22px;
+  box-shadow: 0 24px 60px -30px rgba(42, 20, 32, 0.35);
+  transform: translateY(40px);
+  opacity: 0;
+  transition: transform 0.9s 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s 0.18s;
+}
+.proof header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--line-l);
+}
+.proof header span {
+  font: 400 21px/1.15 var(--serif);
+  letter-spacing: -0.015em;
+}
+.proof header small {
+  padding: 4px 9px;
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a4452f;
+  background: #f6e6df;
+  border-radius: 999px;
+}
+.proof-form div {
+  display: grid;
+  gap: 2px;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--line-l);
+}
+.proof-form div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.proof-form dt {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.proof-form dd {
+  font-size: 17px;
+}
+.proof-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 22px;
+}
+.proof-chips li {
+  padding: 7px 12px;
+  font-size: 14.5px;
+  background: var(--ivory);
+  border-radius: 999px;
+}
+.proof-chips b {
+  font-weight: 600;
+}
+.proof-line {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.proof-line::before {
+  content: '';
+  position: absolute;
+  left: 12.5%;
+  right: 12.5%;
+  top: 7px;
+  height: 2px;
+  background: linear-gradient(90deg, #a4452f, #e8b8a6);
+}
+.proof-line li {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  font-size: 14px;
+}
+.proof-line i {
+  width: 16px;
+  height: 16px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #a4452f;
+}
+.proof-line li:first-child i {
+  background: #a4452f;
+}
+.proof-line span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.proof-note {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line-l);
+  font-size: 14.5px;
+  color: var(--muted);
+}
+.proof-shots {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+.proof-shots li {
+  display: grid;
+  gap: 2px;
+  font-size: 13.5px;
+}
+.proof-shots small {
+  font-size: 12px;
+  color: var(--muted);
+}
+/* "foto": rosto em CSS; as manchas (--s) somem de sessão em sessão */
+.proof-shots span {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  margin-bottom: 6px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: linear-gradient(170deg, #ecd6cb, #c99a88);
+}
+.proof-shots span::before {
+  content: '';
+  position: absolute;
+  left: 22%;
+  right: 22%;
+  top: 16%;
+  bottom: 14%;
+  border-radius: 50% 50% 46% 46%;
+  background:
+    radial-gradient(circle at 38% 30%, rgba(140, 80, 60, var(--s)) 0 4%, transparent 5%),
+    radial-gradient(circle at 60% 26%, rgba(140, 80, 60, var(--s)) 0 3%, transparent 4%),
+    radial-gradient(circle at 50% 36%, rgba(140, 80, 60, calc(var(--s) * 0.8)) 0 3%, transparent 4%),
+    radial-gradient(circle at 34% 62%, rgba(140, 80, 60, calc(var(--s) * 0.7)) 0 4%, transparent 5%),
+    #f1ddd2;
+}
+.proof-shots span::after {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -30%;
+  height: 40%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
 }
 
 /* ---------- Cuidados ---------- */
@@ -705,20 +859,25 @@ em {
 }
 
 /* ---------- Chamada final ---------- */
-.cta-bubbles {
-  position: absolute;
-  right: 4%;
-  top: 0;
-  width: 44%;
-  height: 46%;
-  pointer-events: none;
-}
+/* Duas colunas da mesma altura: à esquerda bolhas em cima e texto embaixo, à direita o card.
+   O topo das bolhas alinha com o topo do card e o status com o fim dele. */
 .cta {
   position: relative;
   min-height: 100vh;
   display: grid;
-  align-items: end;
-  padding: 120px var(--gutter) clamp(56px, 10vh, 110px);
+  align-items: center;
+  padding: calc(var(--hdr) + 40px) var(--gutter) clamp(56px, 10vh, 110px);
+}
+.cta-copy {
+  display: flex;
+  flex-direction: column;
+}
+.cta-bubbles {
+  flex: 1;
+  width: min(100%, 440px);
+  min-height: clamp(180px, 28vh, 300px);
+  margin-bottom: 24px;
+  pointer-events: none;
 }
 .cta .display-2 {
   max-width: 11ch;
@@ -726,7 +885,7 @@ em {
 .cta-in {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
-  align-items: end;
+  align-items: stretch;
   gap: clamp(32px, 5vw, 80px);
 }
 .cta .btn-wa {
@@ -958,8 +1117,45 @@ em {
   .scroll-hint {
     display: none;
   }
-  .verb p {
-    margin-left: 0;
+  .verbs {
+    height: calc(100svh - var(--hdr) - 24px);
+  }
+  .verb {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 22px;
+  }
+  .verb-text {
+    gap: 14px;
+  }
+  .verb strong {
+    font-size: clamp(48px, 14vw, 64px);
+  }
+  .verb-text p {
+    font-size: 19px;
+  }
+  .proof {
+    padding: 18px 18px 16px;
+  }
+  .proof header span {
+    font-size: 18px;
+  }
+  .proof-form div {
+    padding: 9px 0;
+  }
+  .proof-form dd {
+    font-size: 15.5px;
+  }
+  .proof-form div:nth-child(4) {
+    display: none;
+  }
+  .proof-chips {
+    margin: 12px 0 16px;
+  }
+  .proof-note {
+    margin-top: 12px;
+    padding-top: 10px;
+    font-size: 13.5px;
   }
   .method-shape {
     left: -50vw;
@@ -1009,15 +1205,13 @@ em {
     grid-template-columns: 1fr;
   }
   .cta-bubbles {
-    right: 0;
-    width: 100%;
-    height: 30vh;
+    flex: none;
+    height: 26vh;
+    min-height: 0;
+    margin-bottom: 8px;
   }
   .cta .btn-wa {
     width: 100%;
-  }
-  .cta {
-    padding-top: 34vh;
   }
   .cta-in {
     grid-template-columns: 1fr;

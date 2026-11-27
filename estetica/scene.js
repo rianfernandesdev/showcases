@@ -343,7 +343,7 @@ export function startScene(host, quality, state) {
     const e = anchorToElement(ctaEl, camera, W, H, DIST);
     outro.visible = e.onScreen;
     if (e.onScreen) {
-      const unit = e.size / 4;
+      const unit = e.size / 3; // bolhas ocupam o espaço reservado acima do título
       outro.position.set(e.x, e.y, 0);
       endA.position.set(Math.sin(tt * 0.3) * 0.1 * unit, Math.cos(tt * 0.25) * 0.1 * unit, 0);
       endB.position.set((0.95 + Math.cos(tt * 0.3) * 0.1) * unit, (-0.55 + Math.sin(tt * 0.2) * 0.1) * unit, -0.5);
