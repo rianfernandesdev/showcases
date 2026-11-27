@@ -26,14 +26,16 @@ import { range, smooth, lerp } from '../base/scroll.js';
 const DIST = 10;
 
 function glassMaterial(quality, tint = 0xffffff) {
-  if (quality.tier === 'high') {
+  // vidro de verdade (refrata o fundo) no PC e no celular; o simplificado fica só pro aparelho fraco
+  if (quality.tier !== 'low') {
+    const mid = quality.tier === 'mid';
     return new MeshPhysicalMaterial({
       color: tint,
       transmission: 1,
       thickness: 0.35,
       roughness: 0.06,
       ior: 1.35,
-      iridescence: 0.9,
+      iridescence: mid ? 0.7 : 0.9,
       iridescenceIOR: 1.3,
       iridescenceThicknessRange: [200, 600],
       clearcoat: 1,
@@ -125,6 +127,8 @@ function seeded(seed) {
 export function startScene(host, quality, state) {
   const stage = createStage(host, quality, { fov: 30, envIntensity: 1, exposure: 1.05, transparent: false });
   const { scene, camera, pointer } = stage;
+  // no celular a imagem que o vidro refrata é feita em meia resolução: fica igual a olho nu e pesa bem menos
+  if (quality.tier === 'mid') stage.renderer.transmissionResolutionScale = 0.5;
   const reduce = quality.reduce;
   scene.background = new Color(BG);
   const bgMat = new MeshBasicMaterial({ toneMapped: false, depthWrite: false });
