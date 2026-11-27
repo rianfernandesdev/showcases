@@ -279,12 +279,12 @@ export function startScene(host, quality, state) {
       const ay = narrow ? -3.0 : 0.25;
       bigA.position.set(
         (ax + Math.sin(tt * 0.3) * 0.08 - out * (narrow ? 1.2 : 3.2)) * unit,
-        (ay + Math.cos(tt * 0.4) * 0.08 + out * 2.2) * unit,
+        (ay + Math.cos(tt * 0.4) * 0.08 + out * (narrow ? 5.5 : 2.2)) * unit,
         0,
       );
       bigB.position.set(
         (ax + (narrow ? -0.7 : 1.15) + Math.cos(tt * 0.35) * 0.1 + out * 1.8) * unit,
-        (ay - (narrow ? 0.7 : 0.75) + Math.sin(tt * 0.3) * 0.1 + out * 3.4) * unit,
+        (ay - (narrow ? 0.7 : 0.75) + Math.sin(tt * 0.3) * 0.1 + out * (narrow ? 6.5 : 3.4)) * unit,
         -0.6,
       );
       const sA = (narrow ? 1.15 : 1.35) * unit * (1 - out * 0.35);
@@ -299,13 +299,14 @@ export function startScene(host, quality, state) {
         const x = narrow ? (d.x - 0.5) * 4.8 : 0.15 + d.x * 4.6;
         const y = narrow ? -4.6 + cyc * 0.75 : cyc - 3;
         m.position.set(x * unit, y * unit, d.z);
-        m.scale.setScalar(d.s * unit * (1 + out * 0.6));
+        // no celular as bolhinhas somem na saída, pra não cruzar os números e o texto novo
+        m.scale.setScalar(Math.max(0.0001, d.s * unit * (narrow ? 1 - out : 1 + out * 0.6)));
       });
 
       const inP = smooth(range(p, 0.42, 0.85));
       product.position.set(
         a.x + (narrow ? 0 : 0.6) * unit,
-        (narrow ? top : a.y) + lerp(narrow ? -9 : -3.5, narrow ? -3.2 : 0, inP) * unit,
+        (narrow ? top : a.y) + lerp(narrow ? -4.4 : -3.5, narrow ? -3.2 : 0, inP) * unit,
         0,
       );
       product.scale.setScalar(unit * (narrow ? 0.8 : 1) * lerp(0.7, 1, inP));

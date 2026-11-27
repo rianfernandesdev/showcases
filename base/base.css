@@ -158,12 +158,15 @@ ol {
 }
 
 /* Palavras em cascata. */
+/* A caixa de cada palavra corta o que sai dela (é o que esconde a palavra antes de subir).
+   Folga em volta, compensada pela margem negativa: itálico que inclina pra fora e acento
+   em cima não ficam cortados, e o espaçamento entre palavras continua o mesmo. */
 [data-split] .w {
   display: inline-block;
   overflow: hidden;
   vertical-align: top;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
+  padding: 0.12em 0.14em 0.12em;
+  margin: -0.12em -0.14em -0.12em;
 }
 [data-split] .w > span {
   display: inline-block;

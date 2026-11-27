@@ -642,6 +642,7 @@ em {
   text-wrap: balance;
 }
 .proto .btn-dark {
+  justify-content: center;
   background: var(--blush);
   color: var(--plum);
 }
