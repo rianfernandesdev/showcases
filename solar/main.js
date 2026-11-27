@@ -9,7 +9,7 @@ import { trackProgress } from '../base/scroll.js';
 
 initBase();
 
-// ---------- Tour: progresso define a forma do instrumento ----------
+// ---------- Tour: progresso define a pose do módulo solar ----------
 const state = { p: 0 };
 const stepOut = document.querySelector('[data-step]');
 trackProgress(document.getElementById('etapas'), (p) => {
@@ -53,5 +53,5 @@ simulate();
 // ---------- 3D ----------
 const quality = detectQuality();
 when3D(quality, () => {
-  import('./scene.js').then(({ startScene }) => startScene(document.getElementById('instrument'), quality, state));
+  import('./scene.js').then(({ startScene }) => startScene(document.getElementById('instrument'), quality, state, document.getElementById('labels')));
 });

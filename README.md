@@ -8,7 +8,7 @@ pros sites de cliente.
 |---|---|---|---|
 | [`odonto/`](odonto/) · Clara Odontologia | Odontologia | Molar inferior 3D com anatomia real (5 cúspides, sulcos, 2 raízes) que se abre em camadas (esmalte, dentina, polpa, raiz) em 3 vistas presas ao scroll | Brightline (draftly) |
 | [`estetica/`](estetica/) · Ateliê Derme | Estética avançada | Vidro 3D com refração: bolhas, frasco numa caixa de vidro, um objeto por linha de cuidado | Polpharma Biologics |
-| [`solar/`](solar/) · Meridia Energia | Energia solar (coringa) | Relógio solar de 24 h que marca a hora real de POA; formas mudam por etapa; camadas se abrem em 3D; simulador | anime.js |
+| [`solar/`](solar/) · Meridia Energia | Energia solar (coringa) | Módulo solar de 600 W em 3D (120 meias-células, verso com etiqueta e caixa de junção) que muda de pose por etapa, desmonta em camadas e mostra a energia correndo; simulador | anime.js |
 
 As referências entram só como estrutura e ritmo. Marca, textos, cores, fontes e todo o 3D são próprios.
 

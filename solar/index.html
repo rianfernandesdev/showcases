@@ -104,10 +104,16 @@
     </header>
 
     <main>
-      <!-- TOUR: o instrumento fica preso à direita enquanto as etapas passam -->
+      <!-- TOUR: o módulo solar fica preso à direita enquanto as etapas passam -->
       <div class="tour" id="etapas">
         <div class="instrument" id="instrument" aria-hidden="true">
           <picture class="poster-img poster-contain"><source media="(max-width: 760px)" srcset="/solar/poster-mob.webp" /><img src="/solar/poster-desk.webp" alt="" fetchpriority="high" decoding="async" /></picture>
+          <div class="labels" id="labels">
+            <span data-part="frame">Moldura de alumínio</span>
+            <span data-part="glass">Vidro temperado</span>
+            <span data-part="cells">120 meias-células</span>
+            <span data-part="back">Fundo e caixa de junção</span>
+          </div>
           <div class="readout">
             <span>POA <b data-clock>00:00:00</b></span>
             <span>ETAPA <b data-step>00</b>/04</span>
@@ -282,7 +288,7 @@
     <footer class="ftr">
       <span>© <span data-year></span> Meridia Energia · empresa fictícia</span>
       <span>Porto Alegre, RS · atende todo o estado</span>
-      <span>Showcase Site AI-Ready · instrumento 3D em código</span>
+      <span>Showcase Site AI-Ready · módulo solar 3D em código</span>
     </footer>
 
     <script type="module" src="./main.js"></script>

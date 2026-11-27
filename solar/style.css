@@ -197,6 +197,37 @@ body {
   height: 100svh;
   margin-left: auto;
 }
+/* Nomes das camadas quando o módulo desmonta */
+.labels span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text);
+  background: rgba(37, 36, 35, 0.92);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.35s;
+  will-change: transform;
+}
+.labels span::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--amber);
+}
+.labels.is-on span {
+  opacity: 1;
+}
 .readout {
   position: absolute;
   right: var(--gutter);
