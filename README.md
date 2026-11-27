@@ -70,3 +70,5 @@ Mexeu numa cena 3D? Gera as imagens de novo: `npx vite build && npx vite preview
 ## Capas da página inicial
 
 As capas dos cards da página inicial (`public/capas/*.webp`) são prints da abertura de cada showcase no PC, com o 3D carregado. Mudou a abertura de algum? Com o preview rodando, `node tools/capas.mjs` (ou `ONLY=estetica node tools/capas.mjs` pra refazer uma só).
+
+Depois de gerar capas ou posters novos, troca o `?v=` no endereço das imagens (`index.html` de cada página) pela data do dia. O nome do arquivo não muda, então sem isso o navegador e o GitHub Pages continuam mostrando a imagem velha do cache.
