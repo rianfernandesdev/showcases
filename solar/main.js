@@ -50,6 +50,24 @@ function simulate() {
 bill.addEventListener('input', simulate);
 simulate();
 
+// ---------- Relatório de exemplo: gerado x previsto, jan a out ----------
+// Previsto = 180 kWp × 115 kWh/kWp × sazonalidade de POA. Julho cai pela pane do inversor 2.
+{
+  const months = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out'];
+  const season = [1.28, 1.16, 1.05, 0.86, 0.7, 0.6, 0.66, 0.8, 0.92, 1.04];
+  const ratio = [1.03, 0.98, 1.02, 1.01, 0.97, 1.02, 0.78, 1.0, 1.03, 1.04];
+  const exp = season.map((k) => 20.7 * k);
+  const max = Math.max(...exp.map((e, i) => Math.max(e, e * ratio[i])));
+  const fmt = (v) => v.toFixed(1).replace('.', ',');
+  document.getElementById('report-bars').innerHTML = months
+    .map((m, i) => {
+      const real = exp[i] * ratio[i];
+      const low = ratio[i] < 0.9 ? ' is-low' : '';
+      return `<li class="${low.trim()}" style="--r:${(real / max).toFixed(3)};--e:${(exp[i] / max).toFixed(3)}" title="${m}: ${fmt(real)} de ${fmt(exp[i])} MWh"><i></i><span>${m}</span></li>`;
+    })
+    .join('');
+}
+
 // ---------- 3D ----------
 const quality = detectQuality();
 when3D(quality, () => {

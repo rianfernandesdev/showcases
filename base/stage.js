@@ -102,8 +102,9 @@ export function createStage(host, quality, opts = {}) {
     if (frames < 90) {
       frames++;
       if (dt > 1 / 40) slowTime++;
+      // primeiro desce pra 1,5x; só aparelho bem lento vai pra 1x
       if (frames === 90 && slowTime > 45 && dpr > 1) {
-        dpr = 1;
+        dpr = dpr > 1.5 ? 1.5 : 1;
         renderer.setPixelRatio(dpr);
         resize();
       }

@@ -279,9 +279,34 @@
       <!-- CONTATO -->
       <section class="cta" id="contato" aria-labelledby="ct-title">
         <h2 id="ct-title" class="display-2" data-split data-reveal>Manda a conta. <span class="accent">A gente faz a conta.</span></h2>
-        <div class="ctas" data-reveal>
-          <a class="chip chip-hot" href="#" data-demo="Demonstração: no site real, este botão abre o WhatsApp da engenharia.">enviar fatura no WhatsApp <span aria-hidden="true">↗</span></a>
-          <a class="chip chip-line" href="#" data-demo="Demonstração: no site real, copia o e-mail comercial.">copiar e-mail</a>
+        <div class="cta-grid">
+          <article class="report" data-reveal aria-label="Exemplo de relatório mensal">
+            <header class="report-hd">
+              <div>
+                <span class="report-k">Relatório mensal · exemplo</span>
+                <h3>Supermercado em Canoas · 180 kWp</h3>
+              </div>
+              <span class="report-ok"><i></i>Usina operando</span>
+            </header>
+            <dl class="report-kpis">
+              <div><dt>Gerado em outubro</dt><dd>22,4 <small>MWh</small></dd><span class="up">104% do previsto</span></div>
+              <div><dt>Economia no mês</dt><dd>R$ 18.090</dd><span>R$ 151 mil no ano</span></div>
+              <div><dt>CO₂ evitado</dt><dd>2,1 <small>t</small></dd><span>no mês</span></div>
+            </dl>
+            <figure class="report-chart">
+              <figcaption><span><i class="sw-real"></i>gerado</span><span><i class="sw-exp"></i>previsto</span><span class="report-unit">MWh por mês</span></figcaption>
+              <ol class="bars" id="report-bars"></ol>
+            </figure>
+            <ul class="report-log">
+              <li><b class="ok">✓</b>Inversor 2 voltou ao normal depois da troca do fusível <time>14/10</time></li>
+              <li><b class="info">→</b>Limpeza dos módulos agendada <time>08/11</time></li>
+            </ul>
+          </article>
+          <div class="cta-side" data-reveal style="--d: 1">
+            <p class="lead">Depois de pronta, todo mês chega um relatório como esse no seu WhatsApp. Pra começar, só precisa da sua conta de luz.</p>
+            <a class="btn-wa" href="#" data-demo="Demonstração: no site real, este botão abre o WhatsApp da engenharia."><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.2a9.7 9.7 0 0 0-8.4 14.6L2.3 21.7l5-1.3A9.7 9.7 0 1 0 12 2.2zm0 17.7c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1-.8-.3-1.8-.9-2.6-2.1-.2-.3 0-.4.1-.6l.4-.5.2-.4v-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.3c.1.2 1.6 2.5 3.9 3.5 1.5.6 2 .7 2.7.6.4-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.5-.3z"/></svg>Enviar fatura no WhatsApp</a>
+            <a class="chip chip-line" href="#" data-demo="Demonstração: no site real, copia o e-mail comercial.">copiar e-mail comercial</a>
+          </div>
         </div>
       </section>
     </main>

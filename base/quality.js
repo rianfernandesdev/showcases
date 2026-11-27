@@ -20,7 +20,8 @@ export function detectQuality() {
   // Fraco de verdade: pouca memória (Android informa) ou só 2 núcleos.
   // iPhone não informa memória e pode informar poucos núcleos, então não entra aqui por isso.
   if (memory <= 2 || cores <= 2) return { tier: 'low', reduce, dpr: 1, small };
-  const dpr = Math.min(devicePixelRatio || 1, small ? 1.5 : 2);
+  // nitidez: até 2x a resolução da tela (celular de tela boa tem 3x; 2x já fica nítido e não pesa)
+  const dpr = Math.min(devicePixelRatio || 1, 2);
   return { tier: small ? 'mid' : 'high', reduce, dpr, small };
 }
 

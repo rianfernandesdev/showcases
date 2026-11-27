@@ -276,7 +276,7 @@ export function startScene(host, quality, state, labelsEl) {
   const { scene, camera, pointer, renderer } = stage;
   const reduce = quality.reduce;
   const high = quality.tier === 'high';
-  const px = quality.tier === 'low' ? 512 : high ? 1024 : 768;
+  const px = quality.tier === 'low' ? 768 : high ? 2048 : 1536;
   const aniso = Math.min(8, renderer.capabilities.getMaxAnisotropy());
 
   // Luz: sol quente vindo de cima à direita, céu frio de preenchimento
