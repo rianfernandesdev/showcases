@@ -37,6 +37,78 @@
         ]
       }
     </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Vou ficar com cara de “procedimento”?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "O plano parte do que você não quer mudar. Doses e intervalos são pensados pra resultado gradual, revisado nas fotos de cada sessão."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "A avaliação já inclui procedimento?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Não. A avaliação é só pra entender, fotografar e montar o protocolo. Você leva o plano pra casa e decide com calma."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto custa a avaliação?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A avaliação é cobrada à parte e o valor é abatido do protocolo se você fechar em até 30 dias."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto tempo leva pra ver resultado?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depende do procedimento e da sua pele. O protocolo por escrito diz o que esperar em cada etapa, sem promessa de prazo milagroso."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Dói? Tem tempo de recuperação?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usamos anestésico tópico quando o procedimento pede. O tempo de recuperação de cada etapa vem escrito no plano, pra você organizar a agenda."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quem faz o procedimento?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sempre a mesma profissional do começo ao fim do protocolo, com supervisão da responsável técnica."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Dá pra parcelar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, em até 6x no cartão. O valor fechado do protocolo vem no plano, sem surpresa no meio do caminho."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Atende homens também?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim. A avaliação e o protocolo seguem o mesmo método, ajustados à pele e ao que incomoda cada pessoa."
+      }
+    }
+  ]
+}
+    </script>
   </head>
   <body>
     <div class="demo-bar">
@@ -113,7 +185,7 @@
         <div class="care-pin">
           <div class="care-copy">
             <p class="kicker"><i></i>Linhas de cuidado</p>
-            <h2 id="c-title" class="h2">Quatro linhas, <em>um só</em> acompanhamento.</h2>
+            <h2 id="c-title" class="h2">Quatro linhas,<br /><span class="nw"><em>um só</em> acompanhamento.</span></h2>
             <ol class="care-list">
               <li data-i="0">
                 <h3>Harmonização facial</h3>
@@ -214,12 +286,15 @@
       </section>
 
       <!-- DÚVIDAS -->
-      <section class="faq-sec" aria-labelledby="d-title">
-        <div class="faq-grid">
+      <section class="faq-sec" id="duvidas" aria-labelledby="d-title">
+        <div class="faq-top">
+          <p class="kicker" data-reveal><i></i>Dúvidas</p>
           <h2 id="d-title" class="h2" data-split data-reveal>Perguntas <em>frequentes.</em></h2>
+        </div>
+        <div class="faq-wrap">
           <div class="faq" data-reveal>
             <details open>
-              <summary>Vou ficar com cara de "procedimento"?</summary>
+              <summary>Vou ficar com cara de “procedimento”?</summary>
               <p>O plano parte do que você não quer mudar. Doses e intervalos são pensados pra resultado gradual, revisado nas fotos de cada sessão.</p>
             </details>
             <details>
@@ -227,14 +302,41 @@
               <p>Não. A avaliação é só pra entender, fotografar e montar o protocolo. Você leva o plano pra casa e decide com calma.</p>
             </details>
             <details>
+              <summary>Quanto custa a avaliação?</summary>
+              <p>A avaliação é cobrada à parte e o valor é abatido do protocolo se você fechar em até 30 dias.</p>
+            </details>
+            <details>
               <summary>Quanto tempo leva pra ver resultado?</summary>
               <p>Depende do procedimento e da sua pele. O protocolo por escrito diz o que esperar em cada etapa, sem promessa de prazo milagroso.</p>
+            </details>
+            <details>
+              <summary>Dói? Tem tempo de recuperação?</summary>
+              <p>Usamos anestésico tópico quando o procedimento pede. O tempo de recuperação de cada etapa vem escrito no plano, pra você organizar a agenda.</p>
             </details>
             <details>
               <summary>Quem faz o procedimento?</summary>
               <p>Sempre a mesma profissional do começo ao fim do protocolo, com supervisão da responsável técnica.</p>
             </details>
+            <details>
+              <summary>Dá pra parcelar?</summary>
+              <p>Sim, em até 6x no cartão. O valor fechado do protocolo vem no plano, sem surpresa no meio do caminho.</p>
+            </details>
+            <details>
+              <summary>Atende homens também?</summary>
+              <p>Sim. A avaliação e o protocolo seguem o mesmo método, ajustados à pele e ao que incomoda cada pessoa.</p>
+            </details>
           </div>
+          <aside class="faq-card" data-reveal style="--d: 1" aria-label="Outras dúvidas">
+            <h3>Não achou a sua dúvida?</h3>
+            <p>Manda no WhatsApp. A recepção responde no horário de atendimento.</p>
+            <a class="btn btn-wa" href="#" data-demo><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.2a9.7 9.7 0 0 0-8.4 14.6L2.3 21.7l5-1.3A9.7 9.7 0 1 0 12 2.2zm0 17.7c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1-.8-.3-1.8-.9-2.6-2.1-.2-.3 0-.4.1-.6l.4-.5.2-.4v-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.3c.1.2 1.6 2.5 3.9 3.5 1.5.6 2 .7 2.7.6.4-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.5-.3z"/></svg>Perguntar no WhatsApp</a>
+            <ul class="faq-facts">
+              <li>Avaliação de 60 minutos</li>
+              <li>Plano por escrito pra levar</li>
+              <li>Parcela em até 6x</li>
+              <li>Sábado de manhã</li>
+            </ul>
+          </aside>
         </div>
       </section>
 
@@ -253,27 +355,29 @@
     </main>
 
     <footer class="ftr">
-      <div class="ftr-grid">
+      <div class="ftr-row">
         <a class="brand" href="#topo">
           <svg viewBox="0 0 40 24" aria-hidden="true"><circle cx="12" cy="12" r="10" /><circle cx="27" cy="12" r="10" /></svg>
           <span>Ateliê<br />Derme</span>
         </a>
-        <div>
-          <h3>Endereço</h3>
-          <address>Rua Fictícia, 1000 · sala 402<br />Moinhos de Vento · Porto Alegre, RS</address>
-        </div>
-        <div>
+        <div class="ftr-col">
           <h3>Horários</h3>
-          <p>Segunda a sexta, 9h às 19h<br />Sábado, 9h às 13h</p>
+          <ul class="hours">
+            <li data-days="1,2,3,4,5"><span>Seg a sex</span><span>09h às 19h</span></li>
+            <li data-days="6"><span>Sábado</span><span>09h às 13h</span></li>
+            <li data-days="0"><span>Domingo</span><span>fechado</span></li>
+          </ul>
         </div>
-        <div>
-          <h3>Responsável técnica</h3>
-          <p>Dra. Helena Vidal<br />CRM-RS 00000 · RQE 00000</p>
+        <div class="ftr-col">
+          <h3>Onde fica</h3>
+          <address>Rua Fictícia, 1000 · sala 402<br />Moinhos de Vento · Porto Alegre, RS</address>
+          <a href="#" data-demo>(51) 0000-0000</a>
         </div>
+        <p class="status" data-open="yes"><i></i><span data-open-status>Aberto agora</span></p>
       </div>
       <div class="ftr-base">
-        <span>© <span data-year></span> Ateliê Derme · empresa fictícia</span>
-        <span>Showcase Site AI-Ready · vidro 3D em código, sem imagem</span>
+        <span>Responsável técnica: Dra. Helena Vidal · <span class="nw">CRM-RS 00000 · RQE 00000</span></span>
+        <span>© <span data-year></span> Ateliê Derme · <span class="nw">empresa fictícia</span> · <span class="nw">showcase Site AI-Ready</span></span>
       </div>
     </footer>
 
