@@ -934,6 +934,9 @@ address {
 .ftr-col a {
   color: inherit;
 }
+.nw {
+  white-space: nowrap;
+}
 .ftr-base {
   display: flex;
   flex-wrap: wrap;
@@ -1099,7 +1102,19 @@ address {
     margin-top: -6px;
   }
   .ftr-base {
-    margin-top: 22px;
+    flex-direction: column;
+    margin-top: 24px;
+    font-size: 11px;
+  }
+  /* no celular, horário ocupa a largura toda: os horários alinham na mesma borda do resto */
+  .hours {
+    max-width: none;
+  }
+  .hours li {
+    padding: 3px 0;
+  }
+  .hours li + li {
+    border-top: 1px dashed rgba(245, 239, 230, 0.1);
   }
   .slots {
     grid-template-columns: 1fr 1fr;
