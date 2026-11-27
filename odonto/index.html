@@ -39,6 +39,78 @@
         ]
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Dói?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A gente passa anestesia tópica antes de qualquer agulha, então a picada quase não se sente. Se doer em qualquer momento, levanta a mão e a gente para."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quanto custa?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende do seu caso. O valor sai no plano por escrito que você recebe depois da avaliação, com as opções lado a lado."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Vocês atendem convênio?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sim, os principais planos odontológicos. Na avaliação, a gente confere o que o seu plano cobre antes de montar as opções."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Dá pra parcelar?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sim. As formas de pagamento ficam no plano por escrito que você recebe depois da avaliação."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quanto tempo dura a primeira consulta?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Uma hora: conversa, exame com fotos e raio-x, o plano explicado e, se não houver nada urgente, a limpeza."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Atendem criança?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sim, a partir dos 3 anos. A consulta é curta, numa sala com brinquedo, e a criança acompanha tudo no espelho."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Atendem urgência?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sim, no mesmo dia, em horário reservado pra isso. Chama no WhatsApp que a gente encaixa."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Onde estaciono?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No estacionamento conveniado ao lado. A primeira hora fica por nossa conta."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div class="demo-bar">
@@ -251,12 +323,24 @@
               <p>A gente passa anestesia tópica antes de qualquer agulha, então a picada quase não se sente. Se doer em qualquer momento, levanta a mão e a gente para.</p>
             </details>
             <details>
+              <summary>Quanto custa?</summary>
+              <p>Depende do seu caso. O valor sai no plano por escrito que você recebe depois da avaliação, com as opções lado a lado.</p>
+            </details>
+            <details>
               <summary>Vocês atendem convênio?</summary>
               <p>Sim, os principais planos odontológicos. Na avaliação, a gente confere o que o seu plano cobre antes de montar as opções.</p>
             </details>
             <details>
               <summary>Dá pra parcelar?</summary>
               <p>Sim. As formas de pagamento ficam no plano por escrito que você recebe depois da avaliação.</p>
+            </details>
+            <details>
+              <summary>Quanto tempo dura a primeira consulta?</summary>
+              <p>Uma hora: conversa, exame com fotos e raio-x, o plano explicado e, se não houver nada urgente, a limpeza.</p>
+            </details>
+            <details>
+              <summary>Atendem criança?</summary>
+              <p>Sim, a partir dos 3 anos. A consulta é curta, numa sala com brinquedo, e a criança acompanha tudo no espelho.</p>
             </details>
             <details>
               <summary>Atendem urgência?</summary>
@@ -267,6 +351,17 @@
               <p>No estacionamento conveniado ao lado. A primeira hora fica por nossa conta.</p>
             </details>
           </div>
+          <aside class="faq-card" data-reveal style="--d: 1" aria-label="Outras dúvidas">
+            <h3>Não achou a sua dúvida?</h3>
+            <p>Manda no WhatsApp. A recepção responde no horário de atendimento.</p>
+            <a class="btn btn-wa" href="#" data-demo><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.2a9.7 9.7 0 0 0-8.4 14.6L2.3 21.7l5-1.3A9.7 9.7 0 1 0 12 2.2zm0 17.7c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1-.8-.3-1.8-.9-2.6-2.1-.2-.3 0-.4.1-.6l.4-.5.2-.4v-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.3c.1.2 1.6 2.5 3.9 3.5 1.5.6 2 .7 2.7.6.4-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.5-.3z"/></svg>Perguntar no WhatsApp</a>
+            <ul class="faq-facts">
+              <li>Estacionamento conveniado</li>
+              <li>Atende a partir dos 3 anos</li>
+              <li>Sábado de manhã</li>
+              <li>Convênios e parcelamento</li>
+            </ul>
+          </aside>
         </div>
       </section>
     </main>
